@@ -1,4 +1,4 @@
-name: gm-js-starter
+name: cli
 
 on:
   workflow_dispatch:
@@ -12,8 +12,8 @@ jobs:
       - name: Cache Node Modules
         uses: actions/cache@v2
         with:
-          path: 'packages/gm-js-starter/node_modules'
-          key: ${{ runner.os }}-node-${{ hashFiles('packages/gm-js-starter/package-lock.json') }}
+          path: 'packages/cli/node_modules'
+          key: ${{ runner.os }}-node-${{ hashFiles('packages/cli/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Setup Node
@@ -23,24 +23,24 @@ jobs:
           registry-url: https://npm.pkg.github.com/
       - name: Install Node Modules
         run: |
-          cd packages/gm-js-starter
+          cd packages/cli
           npm ci
       - name: Lint
         run: |
-          cd packages/gm-js-starter
+          cd packages/cli
           npm run lint
           npm run prettier:check
       - name: Build Project
         run: |
-          cd packages/gm-js-starter
+          cd packages/cli
           npm run build
       - name: Prepare for Publish
         run: |
-          cd packages/gm-js-starter
+          cd packages/cli
           echo "registry=https://npm.pkg.github.com/@mrzli" > .npmrc
       - name: Publish
         run: |
-          cd packages/gm-js-starter/dist
+          cd packages/cli/dist
           cp ../package.json .
           npm publish
         env:

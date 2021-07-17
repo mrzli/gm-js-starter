@@ -1,12 +1,12 @@
 {
-  "name": "@mrzli/gm-js-starter",
-  "description": "Tool for creating starter javascript/typescript projects.",
+  "name": "@mrzli/gm-js-starter-cli",
+  "description": "Command line tool for creating starter javascript/typescript projects.",
   "version": "1.0.0",
   "author": "goran.mrzljak@gmail.com",
   "repository": {
     "type": "git",
     "url": "https:/github.com:mrzli/gm-js-starter.git",
-    "directory": "packages/gm-js-starter"
+    "directory": "packages/cli"
   },
   "license": "MIT",
   "files": [
