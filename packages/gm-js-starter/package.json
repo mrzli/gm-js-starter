@@ -12,8 +12,6 @@
   "files": [
     "**/*"
   ],
-  "main": "index.js",
-  "types": "index.d.ts",
   "scripts": {
     "build": "rm -rf dist && tsc",
     "lint": "eslint --ext .ts .",
