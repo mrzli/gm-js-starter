@@ -21,7 +21,7 @@
     "prettier:check": "prettier --check ."
   },
   "bin": {
-    "hello": "src/bin/index.js"
+    "hello": "./bin/index.js"
   },
   "dependencies": {
   },
