@@ -23,8 +23,7 @@
   "bin": {
     "hello": "./bin/index.js"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "16.3.2",
     "@typescript-eslint/eslint-plugin": "4.28.3",
