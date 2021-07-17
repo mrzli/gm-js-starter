@@ -1,0 +1,37 @@
+{
+  "name": "@mrzli/gm-js-starter",
+  "description": "Tool for creating starter javascript/typescript projects.",
+  "version": "1.0.0",
+  "author": "goran.mrzljak@gmail.com",
+  "repository": {
+    "type": "git",
+    "url": "https:/github.com:mrzli/gm-js-starter.git",
+    "directory": "packages/gm-js-starter"
+  },
+  "license": "MIT",
+  "files": [
+    "**/*"
+  ],
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "lint": "eslint --ext .ts .",
+    "prettier": "prettier --write .",
+    "prettier:check": "prettier --check ."
+  },
+  "bin": {
+    "hello": "src/bin/index.js"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@types/node": "16.3.2",
+    "@typescript-eslint/eslint-plugin": "4.28.3",
+    "eslint": "7.30.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-prettier": "3.4.0",
+    "prettier": "2.3.2",
+    "typescript": "4.3.5"
+  }
+}

@@ -1,0 +1,47 @@
+name: gm-js-starter
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Latest Commit
+        uses: actions/checkout@v2
+      - name: Cache Node Modules
+        uses: actions/cache@v2
+        with:
+          path: 'packages/gm-js-starter/node_modules'
+          key: ${{ runner.os }}-node-${{ hashFiles('packages/gm-js-starter/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          registry-url: https://npm.pkg.github.com/
+      - name: Install Node Modules
+        run: |
+          cd packages/gm-js-starter
+          npm ci
+      - name: Lint
+        run: |
+          cd packages/gm-js-starter
+          npm run lint
+          npm run prettier:check
+      - name: Build Project
+        run: |
+          cd packages/gm-js-starter
+          npm run build
+      - name: Prepare for Publish
+        run: |
+          cd packages/gm-js-starter
+          echo "registry=https://npm.pkg.github.com/@mrzli" > .npmrc
+      - name: Publish
+        run: |
+          cd packages/gm-js-starter/dist
+          cp ../package.json .
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
