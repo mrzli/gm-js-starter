@@ -23,11 +23,11 @@
     "hello": "./bin/index.js"
   },
   "dependencies": {
-    "@mrzli/gm-js-libraries-json-serializer": "1.0.3",
-    "@mrzli/gm-js-libraries-node-packages-api": "1.0.4"
+    "@mrzli/gm-js-libraries-json-serializer": "1.0.5",
+    "@mrzli/gm-js-libraries-node-packages-api": "1.0.5"
   },
   "devDependencies": {
-    "@types/node": "16.3.3",
+    "@types/node": "16.4.0",
     "@typescript-eslint/eslint-plugin": "4.28.4",
     "eslint": "7.31.0",
     "eslint-config-prettier": "8.3.0",
