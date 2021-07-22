@@ -1,6 +1,6 @@
-import { Options } from 'prettier';
+import { PrettierConfig } from '../../types/generators/prettier-config';
 
-export const prettierConfig: Options = {
+export const prettierConfig: PrettierConfig = {
   printWidth: 80,
   tabWidth: 2,
   useTabs: false,
@@ -16,6 +16,7 @@ export const prettierConfig: Options = {
   rangeEnd: Infinity,
   parser: 'typescript',
   // filepath: undefined,
+  // plugins: [],
   requirePragma: false,
   insertPragma: false,
   proseWrap: 'preserve',

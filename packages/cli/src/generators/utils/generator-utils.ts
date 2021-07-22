@@ -1,18 +1,18 @@
 import ts from 'typescript';
 import prettier from 'prettier';
-import { prettierConfig } from './prettier-config';
+import { PrettierConfig } from '../../types/generators/prettier-config';
 
 const EMPTY_LINE_PLACEHOLDER = '<<<<<EMPTY_LINE>>>>>';
 
 export function stringArrayItemsToFileString(
   arrayItems: readonly string[]
 ): string {
-  let x = 0;
   return arrayItems.join('\n').concat('\n');
 }
 
 export function tsStatementsToFileString(
-  statements: readonly ts.Statement[]
+  statements: readonly ts.Statement[],
+  prettierConfig: PrettierConfig
 ): string {
   const f = ts.factory;
   const sourceFile = f.createSourceFile(

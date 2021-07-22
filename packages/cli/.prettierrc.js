@@ -12,7 +12,7 @@ module.exports = {
   arrowParens: 'always',
   rangeStart: 0,
   rangeEnd: Infinity,
-  // parser: undefined,
+  parser: 'typescript',
   // filepath: undefined,
   requirePragma: false,
   insertPragma: false,

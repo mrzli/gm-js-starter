@@ -17,7 +17,7 @@ import { ProjectType } from '../../../types/generators/inputs/project-type';
 
 export function createTsconfigJson(input: CreateTsconfigJsonInput): string {
   const data = createTsconfigJsonData(input);
-  return jsonSerialize(data, { allowComments: false, spaces: 2 });
+  return jsonSerialize(data, { allowComments: true, spaces: 2 });
 }
 
 function createTsconfigJsonData(

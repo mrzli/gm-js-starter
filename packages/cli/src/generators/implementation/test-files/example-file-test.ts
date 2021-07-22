@@ -3,10 +3,13 @@ import {
   tsCreateEmptyLinePlaceholder,
   tsStatementsToFileString
 } from '../../utils/generator-utils';
+import { CreateExampleFileTestInput } from '../../../types/generators/inputs/create-example-file-test-input';
 
-export function createExampleTestFile(): string {
+export function createExampleTestFile(
+  input: CreateExampleFileTestInput
+): string {
   const statements = createExampleTestFileSyntaxTree();
-  return tsStatementsToFileString(statements);
+  return tsStatementsToFileString(statements, input.prettierConfig);
 }
 
 function createExampleTestFileSyntaxTree(): readonly ts.Statement[] {
