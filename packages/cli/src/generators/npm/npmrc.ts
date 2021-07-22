@@ -5,6 +5,6 @@ export function createNpmrc(input: CreateNpmrcInput): readonly string[] {
 
   return [
     `@${githubUserName}:registry=https://npm.pkg.github.com`,
-    `//npm.pkg.github.com/:_authToken=\$\{${githubPackagesAuthTokenEnvVariableName}\}`
+    `//npm.pkg.github.com/:_authToken=$\{${githubPackagesAuthTokenEnvVariableName}}`
   ];
 }

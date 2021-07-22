@@ -15,8 +15,8 @@
   "scripts": {
     "build": "rm -rf dist && tsc",
     "lint": "eslint --ext .ts .",
-    "prettier": "prettier --write .",
-    "prettier:check": "prettier --check .",
+    "prettier": "prettier --check .",
+    "prettier:write": "prettier --write .",
     "bin:hello": "ts-node src/bin/index.ts"
   },
   "bin": {
