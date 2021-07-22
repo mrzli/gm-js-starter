@@ -9,7 +9,7 @@ import {
 } from '@mrzli/gm-js-libraries-json-serializer/helpers';
 import { NodePackagesApi } from '@mrzli/gm-js-libraries-node-packages-api';
 import { JsonEntryField } from '@mrzli/gm-js-libraries-json-serializer/types/json-entry';
-import { CreatePackageJsonInput } from '../../../types/generators/inputs/create-package-json-input';
+import { CreatePackageJsonInput } from '../../../types/file-generators/inputs/create-package-json-input';
 
 export async function createPackageJson(
   input: CreatePackageJsonInput

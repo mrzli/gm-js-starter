@@ -1,4 +1,4 @@
-import { CreateNpmrcInput } from '../../../types/generators/inputs/create-npmrc-input';
+import { CreateNpmrcInput } from '../../../types/file-generators/inputs/create-npmrc-input';
 import { stringArrayItemsToFileString } from '../../utils/generator-utils';
 
 export function createNpmrc(input: CreateNpmrcInput): string {

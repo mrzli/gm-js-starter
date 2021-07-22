@@ -1,6 +1,6 @@
 import ts from 'typescript';
 import { tsStatementsToFileString } from '../../utils/generator-utils';
-import { CreatePrettierrcJsInput } from '../../../types/generators/inputs/create-prettierrc-js-input';
+import { CreatePrettierrcJsInput } from '../../../types/file-generators/inputs/create-prettierrc-js-input';
 
 export function createPrettierrcJs(input: CreatePrettierrcJsInput): string {
   const statements = createPrettierrcJsSyntaxTree(input);

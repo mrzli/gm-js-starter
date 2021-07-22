@@ -1,6 +1,6 @@
 import ts from 'typescript';
 import { tsStatementsToFileString } from '../../utils/generator-utils';
-import { CreateEslintrcJsInput } from '../../../types/generators/inputs/create-eslintrc-js-input';
+import { CreateEslintrcJsInput } from '../../../types/file-generators/inputs/create-eslintrc-js-input';
 
 export function createEslintrcJs(input: CreateEslintrcJsInput): string {
   const statements = createEslintrcJsSyntaxTree();

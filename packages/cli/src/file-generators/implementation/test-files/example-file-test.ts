@@ -3,7 +3,7 @@ import {
   tsCreateEmptyLinePlaceholder,
   tsStatementsToFileString
 } from '../../utils/generator-utils';
-import { CreateExampleFileTestInput } from '../../../types/generators/inputs/create-example-file-test-input';
+import { CreateExampleFileTestInput } from '../../../types/file-generators/inputs/create-example-file-test-input';
 
 export function createExampleTestFile(
   input: CreateExampleFileTestInput

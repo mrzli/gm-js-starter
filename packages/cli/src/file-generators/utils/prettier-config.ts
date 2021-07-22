@@ -1,4 +1,4 @@
-import { PrettierConfig } from '../../types/generators/prettier-config';
+import { PrettierConfig } from '../../types/file-generators/prettier-config';
 
 export const prettierConfig: PrettierConfig = {
   printWidth: 80,

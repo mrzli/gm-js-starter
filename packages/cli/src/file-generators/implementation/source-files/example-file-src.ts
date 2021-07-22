@@ -1,6 +1,6 @@
 import ts from 'typescript';
 import { tsStatementsToFileString } from '../../utils/generator-utils';
-import { CreateExampleFileSrcInput } from '../../../types/generators/inputs/create-example-file-src-input';
+import { CreateExampleFileSrcInput } from '../../../types/file-generators/inputs/create-example-file-src-input';
 
 export function createExampleFile(input: CreateExampleFileSrcInput): string {
   const statements = createExampleFileSyntaxTree();

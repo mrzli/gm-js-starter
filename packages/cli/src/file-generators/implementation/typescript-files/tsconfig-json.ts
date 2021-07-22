@@ -12,8 +12,8 @@ import {
   entryFieldObject,
   entryFieldString
 } from '@mrzli/gm-js-libraries-json-serializer/helpers';
-import { CreateTsconfigJsonInput } from '../../../types/generators/inputs/create-tsconfig-json-input';
-import { ProjectType } from '../../../types/generators/inputs/project-type';
+import { CreateTsconfigJsonInput } from '../../../types/file-generators/inputs/create-tsconfig-json-input';
+import { ProjectType } from '../../../types/file-generators/inputs/project-type';
 
 export function createTsconfigJson(input: CreateTsconfigJsonInput): string {
   const data = createTsconfigJsonData(input);

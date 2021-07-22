@@ -1,6 +1,6 @@
 import ts from 'typescript';
 import prettier from 'prettier';
-import { PrettierConfig } from '../../types/generators/prettier-config';
+import { PrettierConfig } from '../../types/file-generators/prettier-config';
 
 const EMPTY_LINE_PLACEHOLDER = '<<<<<EMPTY_LINE>>>>>';
 

@@ -1,6 +1,6 @@
 import ts from 'typescript';
 import { tsStatementsToFileString } from '../../utils/generator-utils';
-import { CreateJestConfigJsInput } from '../../../types/generators/inputs/create-jest-config-js-input';
+import { CreateJestConfigJsInput } from '../../../types/file-generators/inputs/create-jest-config-js-input';
 
 export function createJestConfigJsFile(input: CreateJestConfigJsInput): string {
   const statements = createJestConfigJsSyntaxTree();

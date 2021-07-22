@@ -2,11 +2,9 @@ import {
   resolvePath,
   resolvePathFromCwd
 } from '@mrzli/gm-js-libraries-file-system/path';
-import {
-  makeDirectory,
-  writeStringToFile
-} from '@mrzli/gm-js-libraries-file-system/file-system';
-import { createExampleTestFile } from '../../src/file-generators/implementation/test-files/example-file-test';
+import { makeDirectory } from '@mrzli/gm-js-libraries-file-system/file-system';
+import { generate } from '../../src/project-generators/generate';
+import { GenerateProjectInput } from '../../src/types/project-generators/inputs/generate-project-input';
 import { prettierConfig } from '../../src/file-generators/utils/prettier-config';
 
 async function test(): Promise<void> {
@@ -14,9 +12,10 @@ async function test(): Promise<void> {
   const outputDir = resolvePath(testDataDir, 'output-dir');
   await makeDirectory(outputDir);
 
-  const filePath = resolvePath(outputDir, 'example.test.ts');
-  const tsString = createExampleTestFile({ prettierConfig });
-  await writeStringToFile(filePath, tsString);
+  const input: GenerateProjectInput = {
+    prettierConfig
+  };
+  await generate(input);
 }
 
 test().finally(() => {
