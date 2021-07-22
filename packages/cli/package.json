@@ -17,7 +17,8 @@
     "lint": "eslint --ext .ts .",
     "prettier": "prettier --check .",
     "prettier:write": "prettier --write .",
-    "bin:hello": "ts-node src/bin/index.ts"
+    "bin:hello": "ts-node src/bin/index.ts",
+    "manual-tests:example-file-generator": "ts-node test/manual-tests/example-file-generator.ts"
   },
   "bin": {
     "hello": "./bin/index.js"
@@ -27,6 +28,7 @@
     "@mrzli/gm-js-libraries-node-packages-api": "1.0.5"
   },
   "devDependencies": {
+    "@mrzli/gm-js-libraries-file-system": "1.0.3",
     "@types/node": "16.4.0",
     "@typescript-eslint/eslint-plugin": "4.28.4",
     "eslint": "7.31.0",
