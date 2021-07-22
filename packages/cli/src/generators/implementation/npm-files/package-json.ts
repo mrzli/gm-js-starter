@@ -32,12 +32,14 @@ async function createPackageJsonData(
 
   const dependencies: readonly string[] = [];
   const devDependencies: readonly string[] = [
+    '@types/jest',
     '@types/node',
     '@typescript-eslint/eslint-plugin',
     'eslint',
     'eslint-config-prettier',
     'eslint-plugin-prettier',
     'prettier',
+    'ts-jest',
     'ts-node',
     'typescript'
   ];
@@ -77,8 +79,10 @@ function createEntryScripts(): JsonEntryField {
   return entryFieldObject('scripts', [
     entryFieldString('build', 'rm -rf dist && tsc'),
     entryFieldString('lint', 'eslint --ext .ts .'),
-    entryFieldString('prettier', 'prettier --write .'),
-    entryFieldString('prettier:check', 'prettier --check .')
+    entryFieldString('prettier', 'prettier --check .'),
+    entryFieldString('prettier:write', 'prettier --write .'),
+    entryFieldString('test', 'jest'),
+    entryFieldString('test:ci', 'jest --ci')
   ]);
 }
 

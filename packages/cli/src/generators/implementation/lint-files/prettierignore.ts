@@ -10,8 +10,9 @@ function createPrettierIgnoreData(): readonly string[] {
     '/dist/',
     '',
     '/.eslintrc.js',
-    '/README.md',
+    '/.jest.config.js',
     '/tsconfig.json',
-    '/tsconfig.eslint.json'
+    '/tsconfig.eslint.json',
+    '/README.md'
   ];
 }

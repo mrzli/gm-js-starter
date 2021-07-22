@@ -6,5 +6,5 @@ export function createEslintIgnore(): string {
 }
 
 function createEslintIgnoreData(): readonly string[] {
-  return ['/dist/', '', '/.eslintrc.js', '/.prettierrc.js'];
+  return ['/dist/', '', '/.eslintrc.js', '/.prettierrc.js', '/.jest.config.js'];
 }

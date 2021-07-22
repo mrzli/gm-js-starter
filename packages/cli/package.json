@@ -17,6 +17,8 @@
     "lint": "eslint --ext .ts .",
     "prettier": "prettier --check .",
     "prettier:write": "prettier --write .",
+    "test": "jest",
+    "test:ci": "jest --ci",
     "bin:hello": "ts-node src/bin/index.ts",
     "manual-tests:example-file-generator": "ts-node test/manual-tests/example-file-generator.ts"
   },
@@ -29,12 +31,14 @@
   },
   "devDependencies": {
     "@mrzli/gm-js-libraries-file-system": "1.0.3",
+    "@types/jest": "26.0.24",
     "@types/node": "16.4.0",
     "@typescript-eslint/eslint-plugin": "4.28.4",
     "eslint": "7.31.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-prettier": "3.4.0",
     "prettier": "2.3.2",
+    "ts-jest": "27.0.4",
     "ts-node": "10.1.0",
     "typescript": "4.3.5"
   }
