@@ -9,15 +9,7 @@ import {
 } from '@mrzli/gm-js-libraries-json-serializer/helpers';
 import { NodePackagesApi } from '@mrzli/gm-js-libraries-node-packages-api';
 import { JsonEntryField } from '@mrzli/gm-js-libraries-json-serializer/types/json-entry';
-
-export interface CreatePackageJsonInput {
-  readonly nodePackagesApi: NodePackagesApi;
-  readonly githubUserName: string;
-  readonly githubUserEmail: string;
-  readonly githubRepositoryName: string;
-  readonly packageName: string;
-  readonly description: string;
-}
+import { CreatePackageJsonInput } from '../../types/generators/inputs/create-package-json-input';
 
 export async function createPackageJson(
   input: CreatePackageJsonInput

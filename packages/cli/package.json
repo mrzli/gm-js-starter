@@ -23,7 +23,7 @@
     "hello": "./bin/index.js"
   },
   "dependencies": {
-    "@mrzli/gm-js-libraries-json-serializer": "1.0.5",
+    "@mrzli/gm-js-libraries-json-serializer": "1.0.7",
     "@mrzli/gm-js-libraries-node-packages-api": "1.0.5"
   },
   "devDependencies": {
