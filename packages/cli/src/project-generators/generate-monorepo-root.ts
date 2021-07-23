@@ -2,11 +2,11 @@ import { GenerateMonorepoRootInput } from '../types/project-generators/inputs/ge
 import {
   resolvePath,
   resolvePathFromCwd
-} from '@mrzli/gm-js-libraries-file-system/path';
+} from '@mrzli/gm-js-libraries-node-utils/path';
 import {
   makeDirectory,
   writeStringToFile
-} from '@mrzli/gm-js-libraries-file-system/file-system';
+} from '@mrzli/gm-js-libraries-node-utils/file-system';
 import { createMonorepoRootGitIgnore } from '../file-generators/implementation/git-files/monorepot-root-gitignore';
 
 export async function generateMonorepoRoot(

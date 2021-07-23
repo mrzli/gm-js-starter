@@ -1,8 +1,8 @@
 import {
   resolvePath,
   resolvePathFromCwd
-} from '@mrzli/gm-js-libraries-file-system/path';
-import { makeDirectory } from '@mrzli/gm-js-libraries-file-system/file-system';
+} from '@mrzli/gm-js-libraries-node-utils/path';
+import { makeDirectory } from '@mrzli/gm-js-libraries-node-utils/file-system';
 import { GenerateMonorepoRootInput } from '../../src/types/project-generators/inputs/generate-monorepo-root-input';
 import { generateMonorepoRoot } from '../../src/project-generators/generate-monorepo-root';
 

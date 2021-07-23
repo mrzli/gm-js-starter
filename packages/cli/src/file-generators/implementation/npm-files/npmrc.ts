@@ -7,10 +7,10 @@ export function createNpmrc(input: CreateNpmrcInput): string {
 }
 
 function createNpmrcData(input: CreateNpmrcInput): readonly string[] {
-  const { githubUserName, githubPackagesAuthTokenEnvVariableName } = input;
+  const { githubUserName, githubPackagesTokenEnvKey } = input;
 
   return [
     `@${githubUserName}:registry=https://npm.pkg.github.com`,
-    `//npm.pkg.github.com/:_authToken=$\{${githubPackagesAuthTokenEnvVariableName}}`
+    `//npm.pkg.github.com/:_authToken=$\{${githubPackagesTokenEnvKey}}`
   ];
 }

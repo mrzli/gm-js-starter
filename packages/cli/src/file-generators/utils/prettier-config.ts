@@ -1,6 +1,6 @@
 import { PrettierConfig } from '../../types/file-generators/prettier-config';
 
-export const prettierConfig: PrettierConfig = {
+export const PRETTIER_CONFIG: PrettierConfig = {
   printWidth: 80,
   tabWidth: 2,
   useTabs: false,
