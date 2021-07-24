@@ -19,7 +19,7 @@ export async function generateMonorepoRoot(
 
   const githubWorkspacesDirectory = resolvePath(
     monorepoDirectory,
-    './github/workspaces'
+    '.github/workspaces'
   );
   await makeDirectory(githubWorkspacesDirectory);
 
