@@ -13,7 +13,7 @@ import {
   entryFieldString
 } from '@mrzli/gm-js-libraries-json-serializer/helpers';
 import { CreateTsconfigJsonInput } from '../../../types/file-generators/inputs/create-tsconfig-json-input';
-import { ProjectType } from '../../../types/file-generators/inputs/project-type';
+import { ProjectType } from '../../../types/base/project-type';
 
 export function createTsconfigJson(input: CreateTsconfigJsonInput): string {
   const data = createTsconfigJsonData(input);
@@ -36,7 +36,7 @@ function createTsconfigJsonData(
         entryEmptyLine(),
         entryComment('compilation'),
         entryFieldString('module', 'CommonJS'),
-        entryFieldBoolean('RemoveComments', true),
+        entryFieldBoolean('removeComments', true),
         entryFieldString('target', 'ES6'),
         entryEmptyLine(),
         entryComment('checks'),

@@ -4,7 +4,7 @@ import { CreateEslintrcJsInput } from '../../../types/file-generators/inputs/cre
 
 export function createEslintrcJs(input: CreateEslintrcJsInput): string {
   const statements = createEslintrcJsSyntaxTree();
-  return tsStatementsToFileString(statements, input.prettierConfig);
+  return tsStatementsToFileString(statements, input.prettierConfigTsGenerator);
 }
 
 function createEslintrcJsSyntaxTree(): readonly ts.Statement[] {

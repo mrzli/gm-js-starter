@@ -4,7 +4,7 @@ import { CreateExampleFileSrcInput } from '../../../types/file-generators/inputs
 
 export function createExampleFile(input: CreateExampleFileSrcInput): string {
   const statements = createExampleFileSyntaxTree();
-  return tsStatementsToFileString(statements, input.prettierConfig);
+  return tsStatementsToFileString(statements, input.prettierConfigTsGenerator);
 }
 
 function createExampleFileSyntaxTree(): readonly ts.Statement[] {

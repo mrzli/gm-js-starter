@@ -14,7 +14,7 @@ export const PRETTIER_CONFIG: PrettierConfig = {
   arrowParens: 'always',
   rangeStart: 0,
   rangeEnd: Infinity,
-  parser: 'typescript',
+  // parser: undefined,
   // filepath: undefined,
   // plugins: [],
   requirePragma: false,
@@ -24,4 +24,9 @@ export const PRETTIER_CONFIG: PrettierConfig = {
   vueIndentScriptAndStyle: false,
   endOfLine: 'lf',
   embeddedLanguageFormatting: 'auto'
+};
+
+export const PRETTIER_CONFIG_TS_GENERATOR: PrettierConfig = {
+  ...PRETTIER_CONFIG,
+  parser: 'typescript'
 };

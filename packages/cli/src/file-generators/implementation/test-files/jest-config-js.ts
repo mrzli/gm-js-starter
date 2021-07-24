@@ -4,7 +4,7 @@ import { CreateJestConfigJsInput } from '../../../types/file-generators/inputs/c
 
 export function createJestConfigJsFile(input: CreateJestConfigJsInput): string {
   const statements = createJestConfigJsSyntaxTree();
-  return tsStatementsToFileString(statements, input.prettierConfig);
+  return tsStatementsToFileString(statements, input.prettierConfigTsGenerator);
 }
 
 function createJestConfigJsSyntaxTree(): readonly ts.Statement[] {

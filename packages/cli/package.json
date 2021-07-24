@@ -25,7 +25,7 @@
     "hello": "./bin/index.js"
   },
   "dependencies": {
-    "@mrzli/gm-js-libraries-github-api": "1.0.9",
+    "@mrzli/gm-js-libraries-github-api": "1.0.10",
     "@mrzli/gm-js-libraries-json-serializer": "1.0.8",
     "@mrzli/gm-js-libraries-node-packages-api": "1.0.6",
     "@mrzli/gm-js-libraries-node-utils": "1.0.6",

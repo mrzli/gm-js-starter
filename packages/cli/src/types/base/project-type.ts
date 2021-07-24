@@ -1,4 +1,4 @@
 export enum ProjectType {
   Library = 'Library',
-  Cli = 'Clie'
+  Cli = 'Cli'
 }

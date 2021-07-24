@@ -9,7 +9,7 @@ export function createExampleTestFile(
   input: CreateExampleFileTestInput
 ): string {
   const statements = createExampleTestFileSyntaxTree();
-  return tsStatementsToFileString(statements, input.prettierConfig);
+  return tsStatementsToFileString(statements, input.prettierConfigTsGenerator);
 }
 
 function createExampleTestFileSyntaxTree(): readonly ts.Statement[] {

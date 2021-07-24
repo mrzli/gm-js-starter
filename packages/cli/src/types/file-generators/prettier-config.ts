@@ -4,4 +4,4 @@ import { RequiredOptions } from 'prettier';
 export type PrettierConfig = ReadonlyOmit<
   RequiredOptions,
   'parser' | 'filepath' | 'plugins'
-> & { readonly parser: string };
+> & { readonly parser?: RequiredOptions['parser'] };

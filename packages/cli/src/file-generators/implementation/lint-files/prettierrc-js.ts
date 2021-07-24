@@ -4,7 +4,7 @@ import { CreatePrettierrcJsInput } from '../../../types/file-generators/inputs/c
 
 export function createPrettierrcJs(input: CreatePrettierrcJsInput): string {
   const statements = createPrettierrcJsSyntaxTree(input);
-  return tsStatementsToFileString(statements, input.prettierConfig);
+  return tsStatementsToFileString(statements, input.prettierConfigTsGenerator);
 }
 
 function createPrettierrcJsSyntaxTree(
@@ -76,10 +76,11 @@ function createPrettierrcJsSyntaxTree(
                 ? f.createIdentifier('Infinity')
                 : f.createNumericLiteral(prettierConfig.rangeEnd)
             ),
-            f.createPropertyAssignment(
-              f.createIdentifier('parser'),
-              f.createStringLiteral(prettierConfig.parser)
-            ),
+            // parser should not be set of the end project (for now)
+            // f.createPropertyAssignment(
+            //   f.createIdentifier('parser'),
+            //   f.createStringLiteral(prettierConfig.parser)
+            // ),
             f.createPropertyAssignment(
               f.createIdentifier('requirePragma'),
               createBoolean(prettierConfig.requirePragma)
