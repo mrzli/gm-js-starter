@@ -1,26 +1,36 @@
+- options:
+  - generate monorepo root
+  - generate library
+  - generate frontend
+  - generate backend
+
+
 - base implementation:
   - git
     - generation of gitignore +
   - typescript
-    - generation of tsconfig.json
+    - generation of tsconfig.json +
   - npm
     - generation of npmrc +
   - lint
-    - generation of eslintignore, eslint config, prettier ignore, prettier config
+    - generation of
+      - eslintignore +
+      - eslint config +
+      - prettier ignore +
+      - prettier config +
   - ci
     - implement workflow (in .github under base folder)
   - other
-    - src folder with simple example function
+    - src folder with simple example function +
     - README
 
 - input options:
   - test
-    - whether the project has tests
     - need to add test folder with example test
-    - need a `tsconfig.eslint.json` to take into account the test folder
+    - need a `tsconfig.eslint.json` to take into account the test folder +
     - need additional devDependencies:
-      - `@types/jest`, `ts-jest`
-    - need jest config
-    - eslint need to additionally ignore jest config
-    - prettier needs to additionally ignore jest config and new tsconfig
+      - `@types/jest`, `ts-jest` +
+    - need jest config +
+    - eslint need to additionally ignore jest config +
+    - prettier needs to additionally ignore jest config and new tsconfig +
     - ci workflow needs to include test step
