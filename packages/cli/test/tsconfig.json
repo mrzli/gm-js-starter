@@ -2,6 +2,10 @@
   "extends": "../tsconfig.json",
   "include": [
     "automatic-tests",
-    "manual-tests"
-  ]
+    "manual-tests",
+    "shared"
+  ],
+  "compilerOptions": {
+    "rootDir": "."
+  }
 }
