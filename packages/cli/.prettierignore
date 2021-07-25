@@ -1,9 +1,1 @@
 /dist/
-
-/.eslintrc.js
-/README.md
-/tsconfig.json
-/package.json
-
-/test/jest.config.js
-/test/tsconfig.json

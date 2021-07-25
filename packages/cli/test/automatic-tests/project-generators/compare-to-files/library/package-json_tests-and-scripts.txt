@@ -1,0 +1,47 @@
+{
+  "name": "@mrzli/gm-js-starter-cli",
+  "description": "Command line tool for creating starter javascript/typescript projects.",
+  "version": "1.0.0",
+  "author": "goran.mrzljak@gmail.com",
+  "repository": {
+    "type": "git",
+    "url": "https:/github.com:mrzli/gm-js-starter.git",
+    "directory": "packages/cli"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "lint": "eslint --ext .ts .",
+    "prettier": "prettier --check .",
+    "prettier:write": "prettier --write .",
+    "test": "jest --config test/jest.config.js",
+    "test:ci": "jest --config test/jest.config.js --ci",
+    "bin:hello": "ts-node src/bin/index.ts",
+    "mt:gf": "ts-node test/manual-tests/example-file-generator.ts",
+    "mt:gml": "ts-node test/manual-tests/example-monorepo-library-generator.ts",
+    "mt:gmr": "ts-node test/manual-tests/example-monorepo-root-generator.ts"
+  },
+  "bin": {
+    "hello": "./bin/index.js"
+  },
+  "dependencies": {
+    "@mrzli/gm-js-libraries-github-api": "1.0.11",
+    "@mrzli/gm-js-libraries-json-serializer": "1.0.11",
+    "@mrzli/gm-js-libraries-node-packages-api": "1.0.7",
+    "@mrzli/gm-js-libraries-node-utils": "1.0.13",
+    "@mrzli/gm-js-libraries-test-utils": "1.0.1",
+    "@mrzli/gm-js-libraries-utilities": "1.0.10"
+  },
+  "devDependencies": {
+    "@types/jest": "26.0.24",
+    "@types/node": "16.4.2",
+    "@typescript-eslint/eslint-plugin": "4.28.4",
+    "eslint": "7.31.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-prettier": "3.4.0",
+    "prettier": "2.3.2",
+    "ts-jest": "27.0.4",
+    "ts-node": "10.1.0",
+    "typescript": "4.3.5"
+  }
+}

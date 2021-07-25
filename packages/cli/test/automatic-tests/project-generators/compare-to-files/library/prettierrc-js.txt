@@ -3,10 +3,10 @@ module.exports = {
   tabWidth: 2,
   useTabs: false,
   semi: true,
-  singleQuote: true, // default is false
+  singleQuote: true,
   quoteProps: 'as-needed',
-  jsxSingleQuote: true, // default is false
-  trailingComma: 'none', // default is 'es5'
+  jsxSingleQuote: true,
+  trailingComma: 'none',
   bracketSpacing: true,
   jsxBracketSameLine: false,
   arrowParens: 'always',

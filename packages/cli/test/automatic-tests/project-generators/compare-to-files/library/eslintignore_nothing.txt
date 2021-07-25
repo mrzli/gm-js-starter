@@ -1,0 +1,6 @@
+/dist/
+
+/.eslintrc.js
+/.prettierrc.js
+
+/test/jest.config.js

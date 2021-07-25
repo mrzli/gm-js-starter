@@ -1,5 +1,9 @@
 import { ReadonlyTuple2 } from '@mrzli/gm-js-libraries-utilities/types';
-import { readFileAsString } from '@mrzli/gm-js-libraries-node-utils/file-system';
+import {
+  getDirectoryFilePaths,
+  GetFilePathsUnderDirectoryRecursivelySortOrder,
+  readFileAsString
+} from '@mrzli/gm-js-libraries-node-utils/file-system';
 import {
   joinPath,
   resolvePath,
@@ -19,6 +23,24 @@ import {
 import { NodePackagesApi } from '@mrzli/gm-js-libraries-node-packages-api';
 import { getSpecificDateIsoStringPreciseUtc } from '@mrzli/gm-js-libraries-test-utils/date';
 import { isoStringPreciseUtcToIsoStringNonPreciseUtc } from '@mrzli/gm-js-libraries-utilities/date';
+
+export async function checkFileSystemStructureAndContentMatch(
+  testDir: string,
+  rawExpected: RawExpectData
+): Promise<void> {
+  const expected = await prepareExpectData(rawExpected);
+
+  const directoryFilePaths = await getDirectoryFilePaths(testDir, {
+    sortOrder: GetFilePathsUnderDirectoryRecursivelySortOrder.FilesFirst
+  });
+
+  expect(directoryFilePaths).toEqual(expected.entries);
+  for (const filePath of directoryFilePaths) {
+    const fullPath = resolvePath(testDir, filePath);
+    const actualContent = await readFileAsString(fullPath);
+    expect(actualContent).toEqual(expected.contentMap.get(filePath));
+  }
+}
 
 export interface RawExpectData {
   readonly relativeProjectDir: string;

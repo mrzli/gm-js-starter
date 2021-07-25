@@ -106,11 +106,8 @@ export async function generateMonorepoLibrary(
     createExampleFile({ prettierConfigTsGenerator })
   );
 
-  const automaticTestsDirectory = resolvePath(
-    subprojectDirectory,
-    'test',
-    'automatic-tests'
-  );
+  const testDirectory = resolvePath(subprojectDirectory, 'test');
+  const automaticTestsDirectory = resolvePath(testDirectory, 'automatic-tests');
   await makeDirectory(automaticTestsDirectory);
   await writeStringToFile(
     resolvePath(automaticTestsDirectory, 'example.test.ts'),
