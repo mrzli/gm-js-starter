@@ -28,8 +28,9 @@
     "@mrzli/gm-js-libraries-github-api": "1.0.11",
     "@mrzli/gm-js-libraries-json-serializer": "1.0.11",
     "@mrzli/gm-js-libraries-node-packages-api": "1.0.7",
-    "@mrzli/gm-js-libraries-node-utils": "1.0.12",
-    "@mrzli/gm-js-libraries-utilities": "1.0.8"
+    "@mrzli/gm-js-libraries-node-utils": "1.0.13",
+    "@mrzli/gm-js-libraries-test-utils": "1.0.1",
+    "@mrzli/gm-js-libraries-utilities": "1.0.10"
   },
   "devDependencies": {
     "@types/jest": "26.0.24",

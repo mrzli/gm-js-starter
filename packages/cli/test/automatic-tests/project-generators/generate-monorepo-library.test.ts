@@ -1,5 +1,3 @@
-import { generateMonorepoRoot } from '../../../src/project-generators/generate-monorepo-root';
-import { GenerateMonorepoRootInput } from '../../../src/types/project-generators/inputs/generate-monorepo-root-input';
 import { resolvePath } from '@mrzli/gm-js-libraries-node-utils/path';
 import {
   getDirectoryFilePaths,
@@ -7,19 +5,24 @@ import {
   readFileAsString
 } from '@mrzli/gm-js-libraries-node-utils/file-system';
 import {
+  createGithubApiMock,
+  createNodePackagesApiMock,
   getTestDirectoryManager,
   prepareExpectData,
   RawExpectData
 } from './utils/project-generator-test-utils';
+import { generateMonorepoLibrary } from '../../../src/project-generators/generate-monorepo-library';
+import { GenerateMonorepoLibraryInput } from '../../../src/types/project-generators/inputs/generate-monorepo-library-input';
+import { ProjectType } from '../../../src/types/base/project-type';
 
-describe('generate-monorepo-root', () => {
+describe('generate-monorepo-library', () => {
   const TEST_DIRECTORY_MANAGER = getTestDirectoryManager();
 
-  describe('generateMonorepoRoot()', () => {
+  describe('generateMonorepoLibrary()', () => {
     interface Example {
       readonly input: Omit<
-        GenerateMonorepoRootInput,
-        'parentDirectory' | 'setupGit'
+        GenerateMonorepoLibraryInput,
+        'monorepoParentDirectory'
       >;
       readonly expected: RawExpectData;
     }
@@ -27,10 +30,16 @@ describe('generate-monorepo-root', () => {
     const EXAMPLES: readonly Example[] = [
       {
         input: {
-          projectName: 'example-monorepo'
+          githubApi: createGithubApiMock(),
+          nodePackagesApi: createNodePackagesApiMock(),
+          monorepoProjectName: 'example-monorepo',
+          subprojectName: 'example-project',
+          subprojectDescription: 'Project description.',
+          githubPackagesTokenEnvKey: 'GITHUB_PACKAGES_TOKEN',
+          projectType: ProjectType.Library
         },
         expected: {
-          relativeProjectDir: 'example-monorepo',
+          relativeProjectDir: 'example-monorepo/packages/example-project',
           files: [['.gitignore', 'root-gitignore.txt']]
         }
       }
@@ -40,15 +49,14 @@ describe('generate-monorepo-root', () => {
       it(
         JSON.stringify(example.input),
         TEST_DIRECTORY_MANAGER.usingTemporaryDirectory(async (testDir) => {
-          const options: GenerateMonorepoRootInput = {
+          const options: GenerateMonorepoLibraryInput = {
             ...example.input,
-            parentDirectory: testDir,
-            setupGit: false
+            monorepoParentDirectory: testDir
           };
 
           const expected = await prepareExpectData(example.expected);
 
-          await generateMonorepoRoot(options);
+          await generateMonorepoLibrary(options);
 
           const directoryFilePaths = await getDirectoryFilePaths(testDir, {
             sortOrder:

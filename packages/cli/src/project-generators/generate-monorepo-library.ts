@@ -7,8 +7,6 @@ import {
   resolvePath,
   resolvePathFromCwd
 } from '@mrzli/gm-js-libraries-node-utils/path';
-import { getEnvOrThrow } from '@mrzli/gm-js-libraries-node-utils/env';
-import { createGithubApi } from '@mrzli/gm-js-libraries-github-api';
 import { GenerateMonorepoLibraryInput } from '../types/project-generators/inputs/generate-monorepo-library-input';
 import {
   PRETTIER_CONFIG,
@@ -16,7 +14,6 @@ import {
 } from '../file-generators/utils/prettier-config';
 import { createGitIgnore } from '../file-generators/implementation/git-files/gitignore';
 import { createPackageJson } from '../file-generators/implementation/npm-files/package-json';
-import { createNodePackagesApi } from '@mrzli/gm-js-libraries-node-packages-api';
 import { createPrettierIgnore } from '../file-generators/implementation/lint-files/prettierignore';
 import { createPrettierrcJs } from '../file-generators/implementation/lint-files/prettierrc-js';
 import { createEslintIgnore } from '../file-generators/implementation/lint-files/eslintignore';
@@ -33,18 +30,16 @@ export async function generateMonorepoLibrary(
   input: GenerateMonorepoLibraryInput
 ): Promise<void> {
   const {
+    githubApi,
+    nodePackagesApi,
     monorepoParentDirectory,
     monorepoProjectName,
     subprojectName,
     subprojectDescription,
-    githubAccessTokenEnvKey,
     githubPackagesTokenEnvKey
   } = input;
   const prettierConfig = PRETTIER_CONFIG;
   const prettierConfigTsGenerator = PRETTIER_CONFIG_TS_GENERATOR;
-
-  const githubApi = createGithubApi(getEnvOrThrow(githubAccessTokenEnvKey));
-  const nodePackagesApi = createNodePackagesApi();
 
   const githubUser = await githubApi.getUser();
 
