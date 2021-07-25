@@ -1,7 +1,6 @@
-import { ReadonlyOmit } from '@mrzli/gm-js-libraries-utilities/types';
 import { RequiredOptions } from 'prettier';
 
-export type PrettierConfig = ReadonlyOmit<
+export type PrettierConfig = Omit<
   RequiredOptions,
   'parser' | 'filepath' | 'plugins'
 > & { readonly parser?: RequiredOptions['parser'] };
