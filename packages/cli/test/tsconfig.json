@@ -1,0 +1,7 @@
+{
+  "extends": "../tsconfig.json",
+  "include": [
+    "automatic-tests",
+    "manual-tests"
+  ]
+}

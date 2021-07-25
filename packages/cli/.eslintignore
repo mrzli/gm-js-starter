@@ -2,4 +2,5 @@
 
 /.eslintrc.js
 /.prettierrc.js
-/.jest.config.js
+
+/test/jest.config.js
