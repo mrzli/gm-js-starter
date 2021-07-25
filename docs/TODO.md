@@ -1,36 +1,85 @@
+- refactoring:
+  - allow hasTest option
+    - create test folder
+    - create test/automatic-tests folder
+    - create example in automatic tests
+    - create test/tsconfig.json, it should just extend main tsconfig.json and have separate include folders ('automatic-tests', 'manual-tests')
+    - create test/jest.config.js
+      - make sure to point to the correct tsconfig: https://huafu.github.io/ts-jest/user/config/tsConfig
+    - include ts-jest and @types/jest in package.json
+    - create test and test:ci scripts in package.json
+      - need to point to the configuration (probably --config)
+    - ignore test/tsconfig.json and test/jest.config.js in prettier
+    - ignore test/jest.config.js in eslint
+    - add project entry in eslint for 'test/tsconfig.json'
+  - allow hasScripts option
+    - create scripts folder
+    - create scripts/src folder
+    - have completely separate scripts/tsconfig.json
+      - same as library configuration, but will omit 'output' part since it is not needed
+    - create an example script
+      - in scripts/src
+      - just print out 'This is a script!'
+    - add script to package.json
+      - call it example-script
+      - make sure to call it correctly
+        - ts-node --project scripts/tsconfig.json scripts/src/postinstall.ts
+    - ignore scripts/tsconfig.json in prettier
+    - add project entry in eslint for 'scripts/tsconfig.json'
+  
+- automatic tests for generation:
+  - find out how to list all files in the directory, recursively +
+    - use that to test that all the required files were generated, and only the required files
+  - have files with expected results, then compare actual to those file (read the files as strings into test)
+  - later on see that this works on ci
+
 - options:
   - generate monorepo root
   - generate library
   - generate frontend
   - generate backend
 
-
 - base implementation:
-  - git
-    - generation of gitignore +
-  - typescript
-    - generation of tsconfig.json +
-  - npm
-    - generation of npmrc +
-  - lint
-    - generation of
-      - eslintignore +
-      - eslint config +
-      - prettier ignore +
-      - prettier config +
   - ci
     - implement workflow (in .github under base folder)
   - other
-    - src folder with simple example function +
     - README
-
-- input options:
-  - test
-    - need to add test folder with example test
-    - need a `tsconfig.eslint.json` to take into account the test folder +
-    - need additional devDependencies:
-      - `@types/jest`, `ts-jest` +
-    - need jest config +
-    - eslint need to additionally ignore jest config +
-    - prettier needs to additionally ignore jest config and new tsconfig +
-    - ci workflow needs to include test step
+  
+- frontend:
+  - later on setup tests:
+    - generate new cra
+    - see src/App.test.tsx and setupTests.ts
+  - public folder:
+    - favicons
+      - https://favicon.io/favicon-generator/
+        - g / Rounded / Roboto / 110 / #FFFFFF / #00AAAA
+    - manifest.json
+      - need to input project name and display project name
+    - robots.txt
+      - just use from cra
+    - index.html
+      - adjust to take into account icons (or rename icons to fit here)
+      - set title: display project name
+  - src folder:
+    - no tests for now
+    - index.css
+      - rename to 'index.scss' and use verbatim
+    - reportWebVitals.ts
+      - rename to 'report-web-vitals.ts'
+      - use the one from dance site (generate it)
+    - react-app-env.d.ts
+      - copy verbatim
+    - index.ts
+      - will need more work
+      - see dance site, or other projects
+    - .gitignore
+      - /.idea/, /build/, /node_modules/
+    - package.json
+      - look into more details
+    - tsconfig.json
+      - use default from library, then apply the changes
+    - 'components' folder here
+      - App.tsx
+        - simple component returning display project name in div
+        - component function should have a return value
+        - should export component explicitly
