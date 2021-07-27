@@ -3,7 +3,7 @@ import { GenerateMonorepoRootInput } from '../../../src/types/project-generators
 import {
   checkFileSystemStructureAndContentMatch,
   getTestDirectoryManager,
-  RawExpectData
+  RawExpectData,
 } from './utils/project-generator-test-utils';
 
 describe('generate-monorepo-root', () => {
@@ -23,13 +23,13 @@ describe('generate-monorepo-root', () => {
       {
         description: 'simple monorepo',
         input: {
-          projectName: 'example-monorepo'
+          projectName: 'example-monorepo',
         },
         expected: {
           relativeProjectDir: 'example-monorepo',
-          files: [['.gitignore', 'monorepo/gitignore.txt']]
-        }
-      }
+          files: [['.gitignore', 'monorepo/gitignore.txt']],
+        },
+      },
     ];
 
     EXAMPLES.forEach((example) => {
@@ -39,7 +39,7 @@ describe('generate-monorepo-root', () => {
           const options: GenerateMonorepoRootInput = {
             ...example.input,
             parentDirectory: testDir,
-            setupGit: false
+            setupGit: false,
           };
 
           await generateMonorepoRoot(options);

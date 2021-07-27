@@ -1,15 +1,20 @@
 import ts from 'typescript';
 import {
+  getGeneratedFilePrettierParser,
   tsCreateEmptyLinePlaceholder,
-  tsStatementsToFileString
+  tsStatementsToFileString,
 } from '../../utils/generator-utils';
 import { CreateExampleFileTestInput } from '../../../types/file-generators/inputs/create-example-file-test-input';
+import { GeneratedFileType } from '../../../types/base/generated-file-type';
 
 export function createExampleTestFile(
   input: CreateExampleFileTestInput
 ): string {
   const statements = createExampleTestFileSyntaxTree();
-  return tsStatementsToFileString(statements, input.prettierConfigTsGenerator);
+  return tsStatementsToFileString(statements, {
+    ...input.prettierConfig,
+    parser: getGeneratedFilePrettierParser(GeneratedFileType.TypeScript),
+  });
 }
 
 function createExampleTestFileSyntaxTree(): readonly ts.Statement[] {
@@ -22,7 +27,7 @@ function createExampleTestFileSyntaxTree(): readonly ts.Statement[] {
         false,
         undefined,
         f.createNamedImports([
-          f.createImportSpecifier(undefined, f.createIdentifier('add'))
+          f.createImportSpecifier(undefined, f.createIdentifier('add')),
         ])
       ),
       f.createStringLiteral('../../src/example')
@@ -63,10 +68,10 @@ function createExampleTestFileSyntaxTree(): readonly ts.Statement[] {
                                   undefined,
                                   [
                                     f.createNumericLiteral('1'),
-                                    f.createNumericLiteral('2')
+                                    f.createNumericLiteral('2'),
                                   ]
                                 )
-                              )
+                              ),
                             ],
                             ts.NodeFlags.Const
                           )
@@ -84,18 +89,18 @@ function createExampleTestFileSyntaxTree(): readonly ts.Statement[] {
                             undefined,
                             [f.createNumericLiteral('3')]
                           )
-                        )
+                        ),
                       ],
                       true
                     )
-                  )
+                  ),
                 ])
-              )
+              ),
             ],
             true
           )
-        )
+        ),
       ])
-    )
+    ),
   ];
 }

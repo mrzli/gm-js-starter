@@ -1,5 +1,5 @@
-import { PrettierConfig } from '../prettier-config';
+import { Options } from 'prettier';
 
 export interface CreateExampleFileTestInput {
-  readonly prettierConfigTsGenerator: PrettierConfig;
+  readonly prettierConfig: Options;
 }

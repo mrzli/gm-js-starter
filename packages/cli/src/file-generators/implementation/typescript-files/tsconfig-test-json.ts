@@ -5,20 +5,16 @@ import {
 } from '@mrzli/gm-js-libraries-json-serializer/types/json-value';
 import {
   entryArrayItemString,
-  entryComment,
   entryFieldArray,
-  entryFieldBoolean,
-  entryFieldObject,
   entryFieldString,
 } from '@mrzli/gm-js-libraries-json-serializer/helpers';
 import { CreateTsconfigJsonInput } from '../../../types/file-generators/inputs/create-tsconfig-json-input';
-import { ProjectType } from '../../../types/base/project-type';
 import prettier from 'prettier';
 import { getGeneratedFilePrettierParser } from '../../utils/generator-utils';
 import { GeneratedFileType } from '../../../types/base/generated-file-type';
 
-export function createTsconfigJson(input: CreateTsconfigJsonInput): string {
-  const data = createTsconfigJsonData(input);
+export function createTsconfigTestJson(input: CreateTsconfigJsonInput): string {
+  const data = createTsconfigJsonData();
   const jsonString = jsonSerialize(data, { allowComments: false, spaces: 2 });
   return prettier.format(jsonString, {
     ...input.prettierConfig,
@@ -26,30 +22,15 @@ export function createTsconfigJson(input: CreateTsconfigJsonInput): string {
   });
 }
 
-function createTsconfigJsonData(
-  input: CreateTsconfigJsonInput
-): JsonValueObject {
-  const { projectType } = input;
+function createTsconfigJsonData(): JsonValueObject {
   return {
     type: JsonValueType.Object,
     value: [
       entryFieldString('extends', './tsconfig.base.json'),
-      entryFieldArray('include', [entryArrayItemString('src')]),
-      entryFieldObject('compilerOptions', [
-        entryComment('output'),
-        entryFieldString('rootDir', './src'),
-        entryFieldString('outDir', './dist'),
-        entryFieldBoolean('declaration', getDeclaration(projectType)),
+      entryFieldArray('include', [
+        entryArrayItemString('src'),
+        entryArrayItemString('test'),
       ]),
     ],
   };
-}
-
-function getDeclaration(projectType: ProjectType): boolean {
-  switch (projectType) {
-    case ProjectType.Cli:
-      return false;
-    default:
-      return true;
-  }
 }

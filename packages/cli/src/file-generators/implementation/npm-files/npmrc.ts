@@ -11,6 +11,6 @@ function createNpmrcData(input: CreateNpmrcInput): readonly string[] {
 
   return [
     `@${githubUserName}:registry=https://npm.pkg.github.com`,
-    `//npm.pkg.github.com/:_authToken=$\{${githubPackagesTokenEnvKey}}`
+    `//npm.pkg.github.com/:_authToken=$\{${githubPackagesTokenEnvKey}}`,
   ];
 }

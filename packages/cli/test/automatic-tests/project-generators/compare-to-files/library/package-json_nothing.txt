@@ -5,19 +5,19 @@
   "author": "github-email@example.com",
   "repository": {
     "type": "git",
-    "url": "https:/github.com:github-login/monorepo-library.git",
+    "url": "https://github.com:github-login/monorepo.git",
     "directory": "packages/library"
   },
   "license": "MIT",
   "scripts": {
-    "build": "rm -rf dist && tsc --pr && cp ./packages.json dist",
+    "build": "rm -rf dist && tsc && cp ./packages.json dist",
     "lint": "eslint --ext .ts .",
     "prettier": "prettier --check .",
     "prettier:write": "prettier --write ."
   },
   "dependencies": {},
   "devDependencies": {
-    "@types/node": "1.0.0-@types/mode",
+    "@types/node": "1.0.0-@types/node",
     "@typescript-eslint/eslint-plugin": "1.0.0-@typescript-eslint/eslint-plugin",
     "eslint": "1.0.0-eslint",
     "eslint-config-prettier": "1.0.0-eslint-config-prettier",

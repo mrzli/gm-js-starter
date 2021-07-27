@@ -5,7 +5,7 @@ import {
   createGithubApiMock,
   createNodePackagesApiMock,
   getTestDirectoryManager,
-  RawExpectData
+  RawExpectData,
 } from './utils/project-generator-test-utils';
 import { generateMonorepoLibrary } from '../../../src/project-generators/generate-monorepo-library';
 import { GenerateMonorepoLibraryInput } from '../../../src/types/project-generators/inputs/generate-monorepo-library-input';
@@ -20,7 +20,10 @@ describe('generate-monorepo-library', () => {
       'monorepoParentDirectory'
     >;
 
-    function createDefaultInput(): ExampleInput {
+    function createDefaultInput(): Omit<
+      ExampleInput,
+      'hasTests' | 'hasScripts'
+    > {
       return {
         githubApi: createGithubApiMock(),
         nodePackagesApi: createNodePackagesApiMock(),
@@ -28,7 +31,7 @@ describe('generate-monorepo-library', () => {
         subprojectName: 'library',
         subprojectDescription: 'Project description.',
         githubPackagesTokenEnvKey: 'GITHUB_PACKAGES_TOKEN',
-        projectType: ProjectType.Library
+        projectType: ProjectType.Library,
       };
     }
 
@@ -40,28 +43,54 @@ describe('generate-monorepo-library', () => {
 
     const EXAMPLES: readonly Example[] = [
       {
-        description: 'library project',
+        description: 'library project - no tests, no scripts',
         input: {
-          ...createDefaultInput()
+          ...createDefaultInput(),
+          hasTests: false,
+          hasScripts: false,
         },
         expected: {
-          relativeProjectDir: 'example-monorepo/packages/example-project',
+          relativeProjectDir: 'monorepo/packages/library',
           files: [
-            ['.eslintignore', 'library/stub.txt'],
-            ['.eslintrc.js', 'library/stub.txt'],
-            ['.gitignore', 'library/stub.txt'],
-            ['.npmrc', 'library/stub.txt'],
-            ['.prettierignore', 'library/stub.txt'],
-            ['.prettierrc.js', 'library/stub.txt'],
-            ['package.json', 'library/stub.txt'],
-            ['tsconfig.json', 'library/stub.txt'],
-            ['src/example.ts', 'library/stub.txt'],
+            ['.eslintignore', 'library/eslintignore.txt'],
+            ['.eslintrc.js', 'library/eslintrc-js_nothing.txt'],
+            ['.gitignore', 'library/gitignore_nothing.txt'],
+            ['.npmrc', 'library/npmrc.txt'],
+            ['.prettierignore', 'library/prettierignore.txt'],
+            ['.prettierrc.js', 'library/prettierrc-js.txt'],
+            ['package.json', 'library/package-json_nothing.txt'],
+            ['tsconfig.base.json', 'library/tsconfig-base-json.txt'],
+            ['tsconfig.json', 'library/tsconfig-json.txt'],
+            ['src/example.ts', 'library/example-ts.txt'],
+          ],
+        },
+      },
+      {
+        description: 'library project - tests, no scripts',
+        input: {
+          ...createDefaultInput(),
+          hasTests: true,
+          hasScripts: false,
+        },
+        expected: {
+          relativeProjectDir: 'monorepo/packages/library',
+          files: [
+            ['.eslintignore', 'library/eslintignore.txt'],
+            ['.eslintrc.js', 'library/eslintrc-js_nothing.txt'],
+            ['.gitignore', 'library/gitignore_nothing.txt'],
+            ['.npmrc', 'library/npmrc.txt'],
+            ['.prettierignore', 'library/prettierignore.txt'],
+            ['.prettierrc.js', 'library/prettierrc-js.txt'],
+            ['package.json', 'library/package-json_nothing.txt'],
+            ['tsconfig.json', 'library/tsconfig-json.txt'],
+            ['src/example.ts', 'library/example-ts.txt'],
             ['test/jest.config.js', 'library/stub.txt'],
+            ['tsconfig.base.json', 'library/tsconfig-base-json.txt'],
             ['test/tsconfig.json', 'library/stub.txt'],
-            ['test/automatic-tests/example.test.ts', 'library/stub.txt']
-          ]
-        }
-      }
+            ['test/automatic-tests/example.test.ts', 'library/stub.txt'],
+          ],
+        },
+      },
     ];
 
     EXAMPLES.forEach((example) => {
@@ -75,7 +104,7 @@ describe('generate-monorepo-library', () => {
 
           const options: GenerateMonorepoLibraryInput = {
             ...example.input,
-            monorepoParentDirectory: testDir
+            monorepoParentDirectory: testDir,
           };
 
           await generateMonorepoLibrary(options);

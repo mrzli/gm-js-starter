@@ -1,10 +1,17 @@
 import ts from 'typescript';
-import { tsStatementsToFileString } from '../../utils/generator-utils';
+import {
+  getGeneratedFilePrettierParser,
+  tsStatementsToFileString,
+} from '../../utils/generator-utils';
 import { CreateJestConfigJsInput } from '../../../types/file-generators/inputs/create-jest-config-js-input';
+import { GeneratedFileType } from '../../../types/base/generated-file-type';
 
 export function createJestConfigJsFile(input: CreateJestConfigJsInput): string {
   const statements = createJestConfigJsSyntaxTree();
-  return tsStatementsToFileString(statements, input.prettierConfigTsGenerator);
+  return tsStatementsToFileString(statements, {
+    ...input.prettierConfig,
+    parser: getGeneratedFilePrettierParser(GeneratedFileType.JavaScript),
+  });
 }
 
 function createJestConfigJsSyntaxTree(): readonly ts.Statement[] {
@@ -31,15 +38,17 @@ function createJestConfigJsSyntaxTree(): readonly ts.Statement[] {
               f.createIdentifier('testRegex'),
               f.createArrayLiteralExpression(
                 [
-                  f.createStringLiteral('/(?:test/automatic-tests)/.+.test.ts$')
+                  f.createStringLiteral(
+                    '/(?:test/automatic-tests)/.+.test.ts$'
+                  ),
                 ],
                 false
               )
-            )
+            ),
           ],
           true
         )
       )
-    )
+    ),
   ];
 }

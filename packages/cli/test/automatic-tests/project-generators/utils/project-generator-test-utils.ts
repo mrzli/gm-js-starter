@@ -2,23 +2,23 @@ import { ReadonlyTuple2 } from '@mrzli/gm-js-libraries-utilities/types';
 import {
   getDirectoryFilePaths,
   GetFilePathsUnderDirectoryRecursivelySortOrder,
-  readFileAsString
+  readFileAsString,
 } from '@mrzli/gm-js-libraries-node-utils/file-system';
 import {
   joinPath,
   resolvePath,
-  resolvePathFromCwd
+  resolvePathFromCwd,
 } from '@mrzli/gm-js-libraries-node-utils/path';
 import {
   createTestDirectoryManager,
-  TestDirectoryManager
+  TestDirectoryManager,
 } from '@mrzli/gm-js-libraries-test-utils/file-system';
 import {
   CreateRepositoryParams,
   DeleteRepositoryParams,
   GithubApi,
   GithubRepositoryData,
-  GithubUserData
+  GithubUserData,
 } from '@mrzli/gm-js-libraries-github-api';
 import { NodePackagesApi } from '@mrzli/gm-js-libraries-node-packages-api';
 import { getSpecificDateIsoStringPreciseUtc } from '@mrzli/gm-js-libraries-test-utils/date';
@@ -31,7 +31,7 @@ export async function checkFileSystemStructureAndContentMatch(
   const expected = await prepareExpectData(rawExpected);
 
   const directoryFilePaths = await getDirectoryFilePaths(testDir, {
-    sortOrder: GetFilePathsUnderDirectoryRecursivelySortOrder.FilesFirst
+    sortOrder: GetFilePathsUnderDirectoryRecursivelySortOrder.FilesFirst,
   });
 
   expect(directoryFilePaths).toEqual(expected.entries);
@@ -72,7 +72,7 @@ export async function prepareExpectData(
 
   return {
     entries,
-    contentMap
+    contentMap,
   };
 }
 
@@ -88,7 +88,7 @@ export function createGithubApiMock(): GithubApi {
       return {
         id: 'github-id',
         login: 'github-login',
-        email: 'github-email@example.com'
+        email: 'github-email@example.com',
       };
     },
     createRepository: async (
@@ -98,12 +98,12 @@ export function createGithubApiMock(): GithubApi {
         name: 'repository-name',
         createdAt: isoStringPreciseUtcToIsoStringNonPreciseUtc(
           getSpecificDateIsoStringPreciseUtc()
-        )
+        ),
       };
     },
     deleteRepository: async (
       _input: DeleteRepositoryParams
-    ): Promise<void> => {}
+    ): Promise<void> => {},
   };
 }
 
@@ -111,6 +111,6 @@ export function createNodePackagesApiMock(): NodePackagesApi {
   return {
     getPackageLatestVersion: async (packageName: string): Promise<string> => {
       return `1.0.0-${packageName}`;
-    }
+    },
   };
 }

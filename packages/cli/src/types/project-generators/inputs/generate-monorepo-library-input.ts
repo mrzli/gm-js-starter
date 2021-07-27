@@ -11,4 +11,6 @@ export interface GenerateMonorepoLibraryInput {
   readonly subprojectDescription: string;
   readonly githubPackagesTokenEnvKey: string;
   readonly projectType: ProjectType;
+  readonly hasTests: boolean;
+  readonly hasScripts: boolean;
 }

@@ -1,10 +1,10 @@
 import {
   resolvePath,
-  resolvePathFromCwd
+  resolvePathFromCwd,
 } from '@mrzli/gm-js-libraries-node-utils/path';
 import {
   makeDirectory,
-  writeStringToFile
+  writeStringToFile,
 } from '@mrzli/gm-js-libraries-node-utils/file-system';
 import { createExampleTestFile } from '../../src/file-generators/implementation/test-files/example-file-test';
 import { PrettierConfig } from '../../src/file-generators/utils/prettier-config';

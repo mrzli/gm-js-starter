@@ -10,7 +10,7 @@ async function test(): Promise<void> {
   const input: GenerateMonorepoRootInput = {
     parentDirectory: outputDir,
     projectName: 'example-monorepo',
-    setupGit: false
+    setupGit: false,
   };
   await generateMonorepoRoot(input);
 }

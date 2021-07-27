@@ -1,10 +1,17 @@
 import ts from 'typescript';
-import { tsStatementsToFileString } from '../../utils/generator-utils';
+import {
+  getGeneratedFilePrettierParser,
+  tsStatementsToFileString,
+} from '../../utils/generator-utils';
 import { CreateExampleFileSrcInput } from '../../../types/file-generators/inputs/create-example-file-src-input';
+import { GeneratedFileType } from '../../../types/base/generated-file-type';
 
 export function createExampleFile(input: CreateExampleFileSrcInput): string {
   const statements = createExampleFileSyntaxTree();
-  return tsStatementsToFileString(statements, input.prettierConfigTsGenerator);
+  return tsStatementsToFileString(statements, {
+    ...input.prettierConfig,
+    parser: getGeneratedFilePrettierParser(GeneratedFileType.TypeScript),
+  });
 }
 
 function createExampleFileSyntaxTree(): readonly ts.Statement[] {
@@ -34,7 +41,7 @@ function createExampleFileSyntaxTree(): readonly ts.Statement[] {
           undefined,
           f.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
           undefined
-        )
+        ),
       ],
       f.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
       f.createBlock(
@@ -45,10 +52,10 @@ function createExampleFileSyntaxTree(): readonly ts.Statement[] {
               f.createToken(ts.SyntaxKind.PlusToken),
               f.createIdentifier('second')
             )
-          )
+          ),
         ],
         true
       )
-    )
+    ),
   ];
 }

@@ -1,21 +1,30 @@
+import prettier from 'prettier';
 import {
   JsonValueObject,
-  JsonValueType
+  JsonValueType,
 } from '@mrzli/gm-js-libraries-json-serializer/types/json-value';
 import { jsonSerialize } from '@mrzli/gm-js-libraries-json-serializer/serializer';
 import {
   entryFieldObject,
-  entryFieldString
+  entryFieldString,
 } from '@mrzli/gm-js-libraries-json-serializer/helpers';
 import { NodePackagesApi } from '@mrzli/gm-js-libraries-node-packages-api';
 import { JsonEntryField } from '@mrzli/gm-js-libraries-json-serializer/types/json-entry';
 import { CreatePackageJsonInput } from '../../../types/file-generators/inputs/create-package-json-input';
+import { getGeneratedFilePrettierParser } from '../../utils/generator-utils';
+import { GeneratedFileType } from '../../../types/base/generated-file-type';
+import { ReadonlyTuple2 } from '@mrzli/gm-js-libraries-utilities/types';
+import { sortArrayByStringAsc } from '@mrzli/gm-js-libraries-utilities/array';
 
 export async function createPackageJson(
   input: CreatePackageJsonInput
 ): Promise<string> {
   const data = await createPackageJsonData(input);
-  return jsonSerialize(data, { allowComments: false, spaces: 2 });
+  const jsonString = jsonSerialize(data, { allowComments: false, spaces: 2 });
+  return prettier.format(jsonString, {
+    ...input.prettierConfig,
+    parser: getGeneratedFilePrettierParser(GeneratedFileType.Json),
+  });
 }
 
 async function createPackageJsonData(
@@ -27,26 +36,30 @@ async function createPackageJsonData(
     githubUserEmail,
     githubRepositoryName,
     packageName,
-    description
+    description,
+    hasTests,
   } = input;
 
   const dependencies: readonly string[] = [];
-  const devDependencies: readonly string[] = [
-    '@types/jest',
+  const devDependencies: readonly string[] = sortArrayByStringAsc([
     '@types/node',
     '@typescript-eslint/eslint-plugin',
     'eslint',
     'eslint-config-prettier',
     'eslint-plugin-prettier',
     'prettier',
-    'ts-jest',
     'ts-node',
-    'typescript'
-  ];
+    'typescript',
+    ...(hasTests ? ['@types/jest', 'ts-jest'] : []),
+  ]);
 
   const [dependenciesEntry, devDependenciesEntry] = await Promise.all([
     createEntryDependencies(nodePackagesApi, 'dependencies', dependencies),
-    createEntryDependencies(nodePackagesApi, 'devDependencies', devDependencies)
+    createEntryDependencies(
+      nodePackagesApi,
+      'devDependencies',
+      devDependencies
+    ),
   ]);
 
   return {
@@ -65,25 +78,60 @@ async function createPackageJsonData(
           'url',
           `https://github.com:${githubUserName}/${githubRepositoryName}.git`
         ),
-        entryFieldString('directory', `packages/${packageName}`)
+        entryFieldString('directory', `packages/${packageName}`),
       ]),
       entryFieldString('license', 'MIT'),
-      createEntryScripts(),
+      createEntryScripts(input),
       dependenciesEntry,
-      devDependenciesEntry
-    ]
+      devDependenciesEntry,
+    ],
   };
 }
 
-function createEntryScripts(): JsonEntryField {
-  return entryFieldObject('scripts', [
-    entryFieldString('build', 'rm -rf dist && tsc'),
-    entryFieldString('lint', 'eslint --ext .ts .'),
-    entryFieldString('prettier', 'prettier --check .'),
-    entryFieldString('prettier:write', 'prettier --write .'),
-    entryFieldString('test', 'jest'),
-    entryFieldString('test:ci', 'jest --ci')
-  ]);
+function createEntryScripts(input: CreatePackageJsonInput): JsonEntryField {
+  const { hasTests, hasScripts } = input;
+
+  const scripts: readonly ReadonlyTuple2<string, string>[] = [
+    ['build', 'rm -rf dist && tsc && cp ./packages.json dist'],
+    ['lint', 'eslint --ext .ts .'],
+    ['prettier', 'prettier --check .'],
+    ['prettier:write', 'prettier --write .'],
+    ...getTestScripts(hasTests),
+    ...getScriptScripts(hasScripts),
+  ];
+
+  return entryFieldObject(
+    'scripts',
+    scripts.map((script) => entryFieldString(script[0], script[1]))
+  );
+}
+
+function getTestScripts(
+  hasTests: boolean
+): readonly ReadonlyTuple2<string, string>[] {
+  if (!hasTests) {
+    return [];
+  }
+
+  return [
+    ['test', 'jest'],
+    ['test:ci', 'jest --ci'],
+  ];
+}
+
+function getScriptScripts(
+  hasScripts: boolean
+): readonly ReadonlyTuple2<string, string>[] {
+  if (!hasScripts) {
+    return [];
+  }
+
+  return [
+    [
+      'example-script',
+      'ts-node --project tsconfig.scripts.ts scripts/example-script.ts',
+    ],
+  ];
 }
 
 async function createEntryDependencies(

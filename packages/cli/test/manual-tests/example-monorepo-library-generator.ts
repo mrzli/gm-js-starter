@@ -21,8 +21,10 @@ async function test(): Promise<void> {
     monorepoProjectName: 'example-monorepo',
     subprojectName: 'library',
     subprojectDescription: 'Some library project.',
-    githubPackagesTokenEnvKey: 'GITHUB_PACKAGE_TOKEN',
-    projectType: ProjectType.Library
+    githubPackagesTokenEnvKey: 'GITHUB_PACKAGES_TOKEN',
+    projectType: ProjectType.Library,
+    hasTests: true,
+    hasScripts: true,
   };
   await generateMonorepoLibrary(input);
 }

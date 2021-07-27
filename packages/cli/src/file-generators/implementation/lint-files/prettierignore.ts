@@ -6,13 +6,5 @@ export function createPrettierIgnore(): string {
 }
 
 function createPrettierIgnoreData(): readonly string[] {
-  return [
-    '/dist/',
-    '',
-    '/.eslintrc.js',
-    '/.jest.config.js',
-    '/tsconfig.json',
-    '/tsconfig.eslint.json',
-    '/README.md'
-  ];
+  return ['/dist/'];
 }

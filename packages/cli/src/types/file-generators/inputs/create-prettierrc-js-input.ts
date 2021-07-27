@@ -1,6 +1,5 @@
-import { PrettierConfig } from '../prettier-config';
+import { Options } from 'prettier';
 
 export interface CreatePrettierrcJsInput {
-  readonly prettierConfig: PrettierConfig;
-  readonly prettierConfigTsGenerator: PrettierConfig;
+  readonly prettierConfig: Options;
 }

@@ -1,6 +1,6 @@
 import ts from 'typescript';
-import prettier from 'prettier';
-import { PrettierConfig } from '../../types/file-generators/prettier-config';
+import prettier, { BuiltInParserName, Options } from 'prettier';
+import { GeneratedFileType } from '../../types/base/generated-file-type';
 
 const EMPTY_LINE_PLACEHOLDER = '<<<<<EMPTY_LINE>>>>>';
 
@@ -12,7 +12,7 @@ export function stringArrayItemsToFileString(
 
 export function tsStatementsToFileString(
   statements: readonly ts.Statement[],
-  prettierConfig: PrettierConfig
+  prettierConfig: Options
 ): string {
   const f = ts.factory;
   const sourceFile = f.createSourceFile(
@@ -34,4 +34,23 @@ export function tsCreateEmptyLinePlaceholder(): ts.Statement {
   return f.createExpressionStatement(
     f.createStringLiteral(EMPTY_LINE_PLACEHOLDER)
   );
+}
+
+export function getGeneratedFilePrettierParser(
+  generatedFileType: GeneratedFileType
+): BuiltInParserName {
+  switch (generatedFileType) {
+    case GeneratedFileType.TypeScript:
+      return 'typescript';
+    case GeneratedFileType.JavaScript:
+      return 'babel';
+    case GeneratedFileType.Json:
+      return 'json';
+    case GeneratedFileType.TsconfigJson:
+      return 'json';
+    case GeneratedFileType.Markdown:
+      return 'markdown';
+    case GeneratedFileType.Html:
+      return 'html';
+  }
 }
