@@ -31,6 +31,26 @@ function createJestConfigJsSyntaxTree(): readonly ts.Statement[] {
               f.createStringLiteral('ts-jest')
             ),
             f.createPropertyAssignment(
+              f.createIdentifier('globals'),
+              f.createObjectLiteralExpression(
+                [
+                  f.createPropertyAssignment(
+                    f.createStringLiteral('ts-jest'),
+                    f.createObjectLiteralExpression(
+                      [
+                        f.createPropertyAssignment(
+                          f.createIdentifier('tsConfig'),
+                          f.createStringLiteral('<rootDir>/tsconfig.test.json')
+                        ),
+                      ],
+                      true
+                    )
+                  ),
+                ],
+                true
+              )
+            ),
+            f.createPropertyAssignment(
               f.createIdentifier('testEnvironment'),
               f.createStringLiteral('node')
             ),
@@ -39,7 +59,7 @@ function createJestConfigJsSyntaxTree(): readonly ts.Statement[] {
               f.createArrayLiteralExpression(
                 [
                   f.createStringLiteral(
-                    '/(?:test/automatic-tests)/.+.test.ts$'
+                    '/(?:test/automatic-tests)/.+\\.test\\.ts$'
                   ),
                 ],
                 false

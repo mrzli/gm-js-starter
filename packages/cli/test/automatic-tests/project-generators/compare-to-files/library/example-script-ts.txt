@@ -1,0 +1,5 @@
+function exampleScript(): void {
+  console.log('This is an example script...');
+}
+
+exampleScript();

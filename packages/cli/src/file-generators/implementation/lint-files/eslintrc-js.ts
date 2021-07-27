@@ -7,14 +7,17 @@ import { CreateEslintrcJsInput } from '../../../types/file-generators/inputs/cre
 import { GeneratedFileType } from '../../../types/base/generated-file-type';
 
 export function createEslintrcJs(input: CreateEslintrcJsInput): string {
-  const statements = createEslintrcJsSyntaxTree();
+  const statements = createEslintrcJsSyntaxTree(input);
   return tsStatementsToFileString(statements, {
     ...input.prettierConfig,
     parser: getGeneratedFilePrettierParser(GeneratedFileType.JavaScript),
   });
 }
 
-function createEslintrcJsSyntaxTree(): readonly ts.Statement[] {
+function createEslintrcJsSyntaxTree(
+  input: CreateEslintrcJsInput
+): readonly ts.Statement[] {
+  const { hasTests, hasScripts } = input;
   const f = ts.factory;
   return [
     f.createExpressionStatement(
@@ -36,7 +39,7 @@ function createEslintrcJsSyntaxTree(): readonly ts.Statement[] {
                 [
                   f.createPropertyAssignment(
                     f.createIdentifier('project'),
-                    createNodeParserOptionsProject(f)
+                    createNodeParserOptionsProject(f, hasTests, hasScripts)
                   ),
                 ],
                 true
@@ -63,10 +66,18 @@ function createEslintrcJsSyntaxTree(): readonly ts.Statement[] {
 }
 
 function createNodeParserOptionsProject(
-  f: ts.NodeFactory
+  f: ts.NodeFactory,
+  hasTests: boolean,
+  hasScripts: boolean
 ): ts.ArrayLiteralExpression {
+  const projects: readonly string[] = [
+    'tsconfig.json',
+    ...(hasTests ? ['tsconfig.test.json'] : []),
+    ...(hasScripts ? ['tsconfig.scripts.json'] : []),
+  ];
+
   return f.createArrayLiteralExpression(
-    [f.createStringLiteral('tsconfig.json')],
+    projects.map((project) => f.createStringLiteral(project)),
     false
   );
 }

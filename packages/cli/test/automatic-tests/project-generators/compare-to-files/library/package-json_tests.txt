@@ -14,8 +14,8 @@
     "lint": "eslint --ext .ts .",
     "prettier": "prettier --check .",
     "prettier:write": "prettier --write .",
-    "test": "jest --config test/jest.config.js",
-    "test:ci": "jest --config test/jest.config.js --ci"
+    "test": "jest",
+    "test:ci": "jest --ci"
   },
   "dependencies": {},
   "devDependencies": {

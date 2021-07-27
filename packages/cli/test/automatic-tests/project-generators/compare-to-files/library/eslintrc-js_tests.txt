@@ -22,6 +22,6 @@ module.exports = {
         argsIgnorePattern: '^_',
       },
     ],
-    'jest/valid-title': 'off'
+    'jest/valid-title': 'off',
   },
 };
