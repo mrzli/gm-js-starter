@@ -92,7 +92,7 @@ function createEntryScripts(input: CreatePackageJsonInput): JsonEntryField {
   const { hasTests, hasScripts } = input;
 
   const scripts: readonly ReadonlyTuple2<string, string>[] = [
-    ['build', 'rm -rf dist && tsc && cp ./packages.json dist'],
+    ['build', 'rm -rf dist && tsc && cp ./package.json dist'],
     ['lint', 'eslint --ext .ts .'],
     ['prettier', 'prettier --check .'],
     ['prettier:write', 'prettier --write .'],
@@ -129,7 +129,7 @@ function getScriptScripts(
   return [
     [
       'example-script',
-      'ts-node --project tsconfig.scripts.ts scripts/example-script.ts',
+      'ts-node --project tsconfig.scripts.json scripts/example-script.ts',
     ],
   ];
 }

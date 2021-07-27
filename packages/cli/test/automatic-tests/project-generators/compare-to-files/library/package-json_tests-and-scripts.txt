@@ -10,13 +10,13 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "rm -rf dist && tsc && cp ./packages.json dist",
+    "build": "rm -rf dist && tsc && cp ./package.json dist",
     "lint": "eslint --ext .ts .",
     "prettier": "prettier --check .",
     "prettier:write": "prettier --write .",
     "test": "jest",
     "test:ci": "jest --ci",
-    "example-script": "ts-node --project tsconfig.scripts.ts scripts/example-script.ts"
+    "example-script": "ts-node --project tsconfig.scripts.json scripts/example-script.ts"
   },
   "dependencies": {},
   "devDependencies": {
