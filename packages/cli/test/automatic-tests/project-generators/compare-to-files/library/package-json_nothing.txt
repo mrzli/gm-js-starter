@@ -1,47 +1,29 @@
 {
-  "name": "@mrzli/gm-js-starter-cli",
-  "description": "Command line tool for creating starter javascript/typescript projects.",
+  "name": "@github-login/monorepo-library",
+  "description": "Project description.",
   "version": "1.0.0",
-  "author": "goran.mrzljak@gmail.com",
+  "author": "github-email@example.com",
   "repository": {
     "type": "git",
-    "url": "https:/github.com:mrzli/gm-js-starter.git",
-    "directory": "packages/cli"
+    "url": "https:/github.com:github-login/monorepo-library.git",
+    "directory": "packages/library"
   },
   "license": "MIT",
   "scripts": {
-    "build": "rm -rf dist && tsc",
+    "build": "rm -rf dist && tsc --pr && cp ./packages.json dist",
     "lint": "eslint --ext .ts .",
     "prettier": "prettier --check .",
-    "prettier:write": "prettier --write .",
-    "test": "jest --config test/jest.config.js",
-    "test:ci": "jest --config test/jest.config.js --ci",
-    "bin:hello": "ts-node src/bin/index.ts",
-    "mt:gf": "ts-node test/manual-tests/example-file-generator.ts",
-    "mt:gml": "ts-node test/manual-tests/example-monorepo-library-generator.ts",
-    "mt:gmr": "ts-node test/manual-tests/example-monorepo-root-generator.ts"
+    "prettier:write": "prettier --write ."
   },
-  "bin": {
-    "hello": "./bin/index.js"
-  },
-  "dependencies": {
-    "@mrzli/gm-js-libraries-github-api": "1.0.11",
-    "@mrzli/gm-js-libraries-json-serializer": "1.0.11",
-    "@mrzli/gm-js-libraries-node-packages-api": "1.0.7",
-    "@mrzli/gm-js-libraries-node-utils": "1.0.13",
-    "@mrzli/gm-js-libraries-test-utils": "1.0.1",
-    "@mrzli/gm-js-libraries-utilities": "1.0.10"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@types/jest": "26.0.24",
-    "@types/node": "16.4.2",
-    "@typescript-eslint/eslint-plugin": "4.28.4",
-    "eslint": "7.31.0",
-    "eslint-config-prettier": "8.3.0",
-    "eslint-plugin-prettier": "3.4.0",
-    "prettier": "2.3.2",
-    "ts-jest": "27.0.4",
-    "ts-node": "10.1.0",
-    "typescript": "4.3.5"
+    "@types/node": "1.0.0-@types/mode",
+    "@typescript-eslint/eslint-plugin": "1.0.0-@typescript-eslint/eslint-plugin",
+    "eslint": "1.0.0-eslint",
+    "eslint-config-prettier": "1.0.0-eslint-config-prettier",
+    "eslint-plugin-prettier": "1.0.0-eslint-plugin-prettier",
+    "prettier": "1.0.0-prettier",
+    "ts-node": "1.0.0-ts-node",
+    "typescript": "1.0.0-typescript"
   }
 }

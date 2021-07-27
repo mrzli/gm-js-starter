@@ -1,7 +1,5 @@
 {
-  "include": [
-    "src"
-  ],
+  "include": ["src"],
   "compilerOptions": {
     // output
     "rootDir": "./src",
@@ -22,14 +20,8 @@
     "esModuleInterop": true,
 
     // typing
-    "lib": [
-      "ESNext",
-      "DOM",
-      "DOM.Iterable"
-    ],
-    "typeRoots": [
-      "./node_modules/@types/"
-    ],
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "typeRoots": ["./node_modules/@types/"],
 
     // linting
     "noFallthroughCasesInSwitch": true,

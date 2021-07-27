@@ -15,12 +15,26 @@ describe('generate-monorepo-library', () => {
   const TEST_DIRECTORY_MANAGER = getTestDirectoryManager();
 
   describe('generateMonorepoLibrary()', () => {
+    type ExampleInput = Omit<
+      GenerateMonorepoLibraryInput,
+      'monorepoParentDirectory'
+    >;
+
+    function createDefaultInput(): ExampleInput {
+      return {
+        githubApi: createGithubApiMock(),
+        nodePackagesApi: createNodePackagesApiMock(),
+        monorepoProjectName: 'monorepo',
+        subprojectName: 'library',
+        subprojectDescription: 'Project description.',
+        githubPackagesTokenEnvKey: 'GITHUB_PACKAGES_TOKEN',
+        projectType: ProjectType.Library
+      };
+    }
+
     interface Example {
       readonly description: string;
-      readonly input: Omit<
-        GenerateMonorepoLibraryInput,
-        'monorepoParentDirectory'
-      >;
+      readonly input: ExampleInput;
       readonly expected: RawExpectData;
     }
 
@@ -28,13 +42,7 @@ describe('generate-monorepo-library', () => {
       {
         description: 'library project',
         input: {
-          githubApi: createGithubApiMock(),
-          nodePackagesApi: createNodePackagesApiMock(),
-          monorepoProjectName: 'example-monorepo',
-          subprojectName: 'example-project',
-          subprojectDescription: 'Project description.',
-          githubPackagesTokenEnvKey: 'GITHUB_PACKAGES_TOKEN',
-          projectType: ProjectType.Library
+          ...createDefaultInput()
         },
         expected: {
           relativeProjectDir: 'example-monorepo/packages/example-project',

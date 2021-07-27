@@ -16,6 +16,12 @@ module.exports = {
         allowExpressions: true
       }
     ],
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      {
+        argsIgnorePattern: '^_'
+      }
+    ],
     'jest/valid-title': 'off'
   }
 };

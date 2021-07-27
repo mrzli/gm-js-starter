@@ -1,3 +1,1 @@
 # gm-js-starter
-
-
