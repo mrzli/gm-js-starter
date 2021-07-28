@@ -9,20 +9,21 @@
     "directory": "packages/cli"
   },
   "license": "MIT",
+  "main": "bin/gmstarter.js",
+  "bin": {
+    "gmstarter": "./bin/gmstarter.js"
+  },
   "scripts": {
-    "build": "rm -rf dist && tsc",
+    "build": "rm -rf dist && tsc && cp package.json dist",
     "lint": "eslint --ext .ts .",
     "prettier": "prettier --check .",
     "prettier:write": "prettier --write .",
     "test": "jest --config test/jest.config.js",
     "test:ci": "jest --config test/jest.config.js --ci",
-    "bin:hello": "ts-node src/bin/index.ts",
+    "bin:gmstarter": "ts-node src/bin/gmstarter.ts",
     "mt:gf": "ts-node test/manual-tests/example-file-generator.ts",
     "mt:gml": "ts-node test/manual-tests/example-monorepo-library-generator.ts",
     "mt:gmr": "ts-node test/manual-tests/example-monorepo-root-generator.ts"
-  },
-  "bin": {
-    "hello": "./bin/index.js"
   },
   "dependencies": {
     "@mrzli/gm-js-libraries-github-api": "1.0.11",
