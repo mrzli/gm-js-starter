@@ -103,7 +103,7 @@ export function createGithubApiMock(): GithubApi {
     },
     deleteRepository: async (
       _input: DeleteRepositoryParams
-    ): Promise<void> => {},
+    ): Promise<void> => {}, // eslint-disable-line @typescript-eslint/no-empty-function
   };
 }
 

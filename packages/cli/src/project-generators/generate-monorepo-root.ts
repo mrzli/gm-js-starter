@@ -12,7 +12,7 @@ import { createMonorepoRootGitIgnore } from '../file-generators/implementation/g
 export async function generateMonorepoRoot(
   input: GenerateMonorepoRootInput
 ): Promise<void> {
-  const { parentDirectory, projectName, setupGit } = input;
+  const { parentDirectory, projectName } = input;
   const monorepoParentDirectory = resolvePathFromCwd(parentDirectory);
   const monorepoDirectory = resolvePath(monorepoParentDirectory, projectName);
   await makeDirectory(monorepoDirectory);
