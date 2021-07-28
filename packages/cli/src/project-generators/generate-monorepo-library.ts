@@ -38,8 +38,8 @@ export async function generateMonorepoLibrary(
     monorepoParentDirectory,
     monorepoProjectName,
     subprojectName,
-    hasTests,
-    hasScripts,
+    setupTests,
+    setupScripts,
   } = input;
   const { githubApi } = context;
   const prettierConfig = PRETTIER_CONFIG;
@@ -84,7 +84,7 @@ export async function generateMonorepoLibrary(
     createExampleFile({ prettierConfig })
   );
 
-  if (hasTests) {
+  if (setupTests) {
     const testDirectory = resolvePath(subprojectDirectory, 'test');
     const automaticTestsDirectory = resolvePath(
       testDirectory,
@@ -97,7 +97,7 @@ export async function generateMonorepoLibrary(
     );
   }
 
-  if (hasScripts) {
+  if (setupScripts) {
     const scriptsDirectory = resolvePath(subprojectDirectory, 'scripts');
     await makeDirectory(scriptsDirectory);
     await writeStringToFile(
@@ -118,13 +118,13 @@ async function getRootFiles(
     subprojectName,
     subprojectDescription,
     githubPackagesTokenEnvKey,
-    hasTests,
-    hasScripts,
+    setupTests,
+    setupScripts,
   } = input;
   const { nodePackagesApi } = context;
 
   return [
-    ['.gitignore', createGitIgnore({ hasTests })],
+    ['.gitignore', createGitIgnore({ setupTests })],
     [
       'package.json',
       await createPackageJson({
@@ -135,8 +135,8 @@ async function getRootFiles(
         githubRepositoryName: monorepoProjectName,
         packageName: subprojectName,
         description: subprojectDescription,
-        hasTests,
-        hasScripts,
+        setupTests,
+        setupScripts,
       }),
     ],
     [
@@ -158,8 +158,8 @@ async function getRootFiles(
       '.eslintrc.js',
       createEslintrcJs({
         prettierConfig,
-        hasTests,
-        hasScripts,
+        setupTests,
+        setupScripts,
       }),
     ],
     [
@@ -176,16 +176,16 @@ async function getRootFiles(
         projectType: ProjectType.Library,
       }),
     ],
-    ...getTestRootFiles(hasTests, prettierConfig),
-    ...getScriptsRootFiles(hasScripts, prettierConfig),
+    ...getTestRootFiles(setupTests, prettierConfig),
+    ...getScriptsRootFiles(setupScripts, prettierConfig),
   ];
 }
 
 function getTestRootFiles(
-  hasTests: boolean,
+  setupTests: boolean,
   prettierConfig: Options
 ): readonly ReadonlyTuple2<string, string>[] {
-  if (!hasTests) {
+  if (!setupTests) {
     return [];
   }
 

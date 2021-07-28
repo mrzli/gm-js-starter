@@ -17,7 +17,7 @@ export function createEslintrcJs(input: CreateEslintrcJsInput): string {
 function createEslintrcJsSyntaxTree(
   input: CreateEslintrcJsInput
 ): readonly ts.Statement[] {
-  const { hasTests, hasScripts } = input;
+  const { setupTests, setupScripts } = input;
   const f = ts.factory;
   return [
     f.createExpressionStatement(
@@ -39,7 +39,7 @@ function createEslintrcJsSyntaxTree(
                 [
                   f.createPropertyAssignment(
                     f.createIdentifier('project'),
-                    createNodeParserOptionsProject(f, hasTests, hasScripts)
+                    createNodeParserOptionsProject(f, setupTests, setupScripts)
                   ),
                 ],
                 true
@@ -67,13 +67,13 @@ function createEslintrcJsSyntaxTree(
 
 function createNodeParserOptionsProject(
   f: ts.NodeFactory,
-  hasTests: boolean,
-  hasScripts: boolean
+  setupTests: boolean,
+  setupScripts: boolean
 ): ts.ArrayLiteralExpression {
   const projects: readonly string[] = [
     'tsconfig.json',
-    ...(hasTests ? ['tsconfig.test.json'] : []),
-    ...(hasScripts ? ['tsconfig.scripts.json'] : []),
+    ...(setupTests ? ['tsconfig.test.json'] : []),
+    ...(setupScripts ? ['tsconfig.scripts.json'] : []),
   ];
 
   return f.createArrayLiteralExpression(

@@ -9,6 +9,6 @@ export interface CreatePackageJsonInput {
   readonly githubRepositoryName: string;
   readonly packageName: string;
   readonly description: string;
-  readonly hasTests: boolean;
-  readonly hasScripts: boolean;
+  readonly setupTests: boolean;
+  readonly setupScripts: boolean;
 }

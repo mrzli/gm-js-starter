@@ -22,8 +22,8 @@ async function test(): Promise<void> {
     subprojectDescription: 'Some library project.',
     githubPackagesTokenEnvKey: 'GITHUB_PACKAGES_TOKEN',
     projectType: ProjectType.Library,
-    hasTests: true,
-    hasScripts: true,
+    setupTests: true,
+    setupScripts: true,
   };
   const context: GeneratorContext = {
     githubApi,

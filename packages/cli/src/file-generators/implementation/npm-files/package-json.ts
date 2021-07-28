@@ -37,7 +37,7 @@ async function createPackageJsonData(
     githubRepositoryName,
     packageName,
     description,
-    hasTests,
+    setupTests,
   } = input;
 
   const dependencies: readonly string[] = [];
@@ -50,7 +50,7 @@ async function createPackageJsonData(
     'prettier',
     'ts-node',
     'typescript',
-    ...(hasTests ? ['@types/jest', 'ts-jest'] : []),
+    ...(setupTests ? ['@types/jest', 'ts-jest'] : []),
   ]);
 
   const [dependenciesEntry, devDependenciesEntry] = await Promise.all([
@@ -89,15 +89,15 @@ async function createPackageJsonData(
 }
 
 function createEntryScripts(input: CreatePackageJsonInput): JsonEntryField {
-  const { hasTests, hasScripts } = input;
+  const { setupTests, setupScripts } = input;
 
   const scripts: readonly ReadonlyTuple2<string, string>[] = [
     ['build', 'rm -rf dist && tsc && cp ./package.json dist'],
     ['lint', 'eslint --ext .ts .'],
     ['prettier', 'prettier --check .'],
     ['prettier:write', 'prettier --write .'],
-    ...getTestScripts(hasTests),
-    ...getScriptScripts(hasScripts),
+    ...getTestScripts(setupTests),
+    ...getScriptScripts(setupScripts),
   ];
 
   return entryFieldObject(
@@ -107,9 +107,9 @@ function createEntryScripts(input: CreatePackageJsonInput): JsonEntryField {
 }
 
 function getTestScripts(
-  hasTests: boolean
+  setupTests: boolean
 ): readonly ReadonlyTuple2<string, string>[] {
-  if (!hasTests) {
+  if (!setupTests) {
     return [];
   }
 

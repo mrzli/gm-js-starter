@@ -1,3 +1,3 @@
 export interface CreateGitignoreInput {
-  readonly hasTests: boolean;
+  readonly setupTests: boolean;
 }

@@ -2,6 +2,6 @@ import { Options } from 'prettier';
 
 export interface CreateEslintrcJsInput {
   readonly prettierConfig: Options;
-  readonly hasTests: boolean;
-  readonly hasScripts: boolean;
+  readonly setupTests: boolean;
+  readonly setupScripts: boolean;
 }

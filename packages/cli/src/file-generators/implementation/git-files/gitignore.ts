@@ -7,11 +7,11 @@ export function createGitIgnore(input: CreateGitignoreInput): string {
 }
 
 function createGitIgnoreData(input: CreateGitignoreInput): readonly string[] {
-  const { hasTests } = input;
+  const { setupTests } = input;
   return [
     '/.idea/',
     '/node_modules/',
     '/dist/',
-    ...(hasTests ? ['', '/test/output/'] : []),
+    ...(setupTests ? ['', '/test/output/'] : []),
   ];
 }

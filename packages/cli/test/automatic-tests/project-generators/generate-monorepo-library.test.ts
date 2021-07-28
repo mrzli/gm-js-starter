@@ -28,7 +28,7 @@ describe('generate-monorepo-library', () => {
 
     function createDefaultInput(): Omit<
       ExampleInput,
-      'hasTests' | 'hasScripts'
+      'setupTests' | 'setupScripts'
     > {
       return {
         monorepoProjectName: 'monorepo',
@@ -50,8 +50,8 @@ describe('generate-monorepo-library', () => {
         description: 'library project - no tests, no scripts',
         input: {
           ...createDefaultInput(),
-          hasTests: false,
-          hasScripts: false,
+          setupTests: false,
+          setupScripts: false,
         },
         expected: {
           relativeProjectDir: 'monorepo/packages/library',
@@ -73,8 +73,8 @@ describe('generate-monorepo-library', () => {
         description: 'library project - tests, no scripts',
         input: {
           ...createDefaultInput(),
-          hasTests: true,
-          hasScripts: false,
+          setupTests: true,
+          setupScripts: false,
         },
         expected: {
           relativeProjectDir: 'monorepo/packages/library',
@@ -102,8 +102,8 @@ describe('generate-monorepo-library', () => {
         description: 'library project - no tests, scripts',
         input: {
           ...createDefaultInput(),
-          hasTests: false,
-          hasScripts: true,
+          setupTests: false,
+          setupScripts: true,
         },
         expected: {
           relativeProjectDir: 'monorepo/packages/library',
@@ -127,8 +127,8 @@ describe('generate-monorepo-library', () => {
         description: 'library project - tests, scripts',
         input: {
           ...createDefaultInput(),
-          hasTests: true,
-          hasScripts: true,
+          setupTests: true,
+          setupScripts: true,
         },
         expected: {
           relativeProjectDir: 'monorepo/packages/library',
