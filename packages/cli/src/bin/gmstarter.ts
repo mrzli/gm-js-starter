@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-
-async function gmstarter(): Promise<void> {
-  console.log('Hello!');
-}
+import { gmstarter } from '../cli/gmstarter';
 
 gmstarter().finally();
