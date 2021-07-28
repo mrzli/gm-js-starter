@@ -25,6 +25,8 @@ jobs:
         run: |
           cd packages/cli
           npm ci
+        env:
+          GITHUB_PACKAGES_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Lint
         run: |
           cd packages/cli
