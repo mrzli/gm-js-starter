@@ -6,6 +6,7 @@ import { ProjectType } from '../../src/types/base/project-type';
 import { createGithubApi } from '@mrzli/gm-js-libraries-github-api';
 import { getEnvOrThrow } from '@mrzli/gm-js-libraries-node-utils/env';
 import { createNodePackagesApi } from '@mrzli/gm-js-libraries-node-packages-api';
+import { GeneratorContext } from '../../src/types/project-generators/generator-context';
 
 async function test(): Promise<void> {
   const outputDir = resolvePathFromCwd('../../../gm-js-starter-output-dir');
@@ -15,8 +16,6 @@ async function test(): Promise<void> {
   const nodePackagesApi = createNodePackagesApi();
 
   const input: GenerateMonorepoLibraryInput = {
-    githubApi,
-    nodePackagesApi,
     monorepoParentDirectory: outputDir,
     monorepoProjectName: 'example-monorepo',
     subprojectName: 'library',
@@ -26,7 +25,11 @@ async function test(): Promise<void> {
     hasTests: true,
     hasScripts: true,
   };
-  await generateMonorepoLibrary(input);
+  const context: GeneratorContext = {
+    githubApi,
+    nodePackagesApi,
+  };
+  await generateMonorepoLibrary(input, context);
 }
 
 test()

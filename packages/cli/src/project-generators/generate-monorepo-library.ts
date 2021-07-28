@@ -28,18 +28,20 @@ import { createTsconfigTestJson } from '../file-generators/implementation/typesc
 import { createTsconfigScriptsJson } from '../file-generators/implementation/typescript-files/tsconfig-scripts-json';
 import { createExampleTestFile } from '../file-generators/implementation/test-files/example-file-test';
 import { createExampleScriptFile } from '../file-generators/implementation/script-files/example-file-script';
+import { GeneratorContext } from '../types/project-generators/generator-context';
 
 export async function generateMonorepoLibrary(
-  input: GenerateMonorepoLibraryInput
+  input: GenerateMonorepoLibraryInput,
+  context: GeneratorContext
 ): Promise<void> {
   const {
-    githubApi,
     monorepoParentDirectory,
     monorepoProjectName,
     subprojectName,
     hasTests,
     hasScripts,
   } = input;
+  const { githubApi } = context;
   const prettierConfig = PRETTIER_CONFIG;
 
   const githubUser = await githubApi.getUser();
@@ -61,7 +63,12 @@ export async function generateMonorepoLibrary(
   );
   await makeDirectory(subprojectDirectory);
 
-  const rootFiles = await getRootFiles(input, prettierConfig, githubUser);
+  const rootFiles = await getRootFiles(
+    input,
+    context,
+    prettierConfig,
+    githubUser
+  );
 
   for (const rootFile of rootFiles) {
     await writeStringToFile(
@@ -102,11 +109,11 @@ export async function generateMonorepoLibrary(
 
 async function getRootFiles(
   input: GenerateMonorepoLibraryInput,
+  context: GeneratorContext,
   prettierConfig: Options,
   githubUser: GithubUserData
 ): Promise<readonly ReadonlyTuple2<string, string>[]> {
   const {
-    nodePackagesApi,
     monorepoProjectName,
     subprojectName,
     subprojectDescription,
@@ -114,6 +121,7 @@ async function getRootFiles(
     hasTests,
     hasScripts,
   } = input;
+  const { nodePackagesApi } = context;
 
   return [
     ['.gitignore', createGitIgnore({ hasTests })],

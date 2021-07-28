@@ -10,6 +10,7 @@ import {
 import { generateMonorepoLibrary } from '../../../src/project-generators/generate-monorepo-library';
 import { GenerateMonorepoLibraryInput } from '../../../src/types/project-generators/inputs/generate-monorepo-library-input';
 import { ProjectType } from '../../../src/types/base/project-type';
+import { GeneratorContext } from '../../../src/types/project-generators/generator-context';
 
 describe('generate-monorepo-library', () => {
   const TEST_DIRECTORY_MANAGER = getTestDirectoryManager();
@@ -20,13 +21,16 @@ describe('generate-monorepo-library', () => {
       'monorepoParentDirectory'
     >;
 
+    const CONTEXT: GeneratorContext = {
+      githubApi: createGithubApiMock(),
+      nodePackagesApi: createNodePackagesApiMock(),
+    };
+
     function createDefaultInput(): Omit<
       ExampleInput,
       'hasTests' | 'hasScripts'
     > {
       return {
-        githubApi: createGithubApiMock(),
-        nodePackagesApi: createNodePackagesApiMock(),
         monorepoProjectName: 'monorepo',
         subprojectName: 'library',
         subprojectDescription: 'Project description.',
@@ -166,7 +170,7 @@ describe('generate-monorepo-library', () => {
             monorepoParentDirectory: testDir,
           };
 
-          await generateMonorepoLibrary(options);
+          await generateMonorepoLibrary(options, CONTEXT);
 
           await checkFileSystemStructureAndContentMatch(
             testDir,
