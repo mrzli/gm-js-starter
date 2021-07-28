@@ -44,10 +44,9 @@ jobs:
         run: |
           cd packages/cli
           echo "registry=https://npm.pkg.github.com/@mrzli" > .npmrc
-      - name: Publish
-        run: |
-          cd packages/cli/dist
-          cp ../package.json .
-          npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      - name: Publish
+#        run: |
+#          cd packages/cli/dist
+#          npm publish
+#        env:
+#          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
