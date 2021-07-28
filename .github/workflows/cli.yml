@@ -30,6 +30,10 @@ jobs:
           cd packages/cli
           npm run lint
           npm run prettier
+      - name: Test
+        run: |
+          cd packages/cli
+          npm run test:ci
       - name: Build Project
         run: |
           cd packages/cli
